@@ -1,5 +1,6 @@
-export const badgeSimple = (title = "Badge example", color = "#333") => {
+export const badgePlain = (title = "Badge example", color = "#333") => {
   const w = title.length * 6.5 + 20;
+
   return `<svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" width="${w}" height="20">
   <title>${title}</title>
   <defs>

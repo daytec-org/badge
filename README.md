@@ -4,6 +4,7 @@ A pet project that provide ability to get variety of svg badges.
 
 ### Stack:
 - Deno
+- Oak
 
 ### Installation:
 - `curl -fsSL https://deno.land/install.sh | sh`
@@ -13,7 +14,9 @@ A pet project that provide ability to get variety of svg badges.
 ### Usage:
 `deno task dev`
 
-`http://localhost:3000/<badge name>/<id>/?title=Badge example&color=blue`
+`http://localhost:3000/<badge name>/?title=Badge example&color=blue`
 
-example:
-`http://localhost:3000/simple/default`
+example: `http://localhost:3000/plain`
+
+## Badges:
+- plain [title, color]
