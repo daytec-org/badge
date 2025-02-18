@@ -1,4 +1,4 @@
-import { Request } from "jsr:@oak/oak";
+import { type Request } from "jsr:@oak/oak";
 
 export function requestLog(text: string, req: Request, name?: string) {
   const timestamp = new Date().toJSON().slice(0, 19);

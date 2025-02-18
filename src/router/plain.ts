@@ -1,4 +1,4 @@
-import { Context } from "jsr:@oak/oak/";
+import { type Context } from "jsr:@oak/oak/";
 import { badgePlain } from "~/src/badge/plain.ts";
 import { requestLog } from "~/src/utils/log.ts";
 

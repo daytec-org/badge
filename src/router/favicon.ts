@@ -1,4 +1,4 @@
-import { Context } from "jsr:@oak/oak/";
+import { type Context } from "jsr:@oak/oak/";
 import { requestLog } from "~/src/utils/log.ts";
 import getIcon from "~/src/utils/getIcon.ts";
 
