@@ -2,7 +2,7 @@ import { type Context } from 'jsr:@oak/oak/'
 import { badgePlain } from '~/src/badge/plain.ts'
 import { requestLog } from '~/src/utils/log.ts'
 
-export async function plain({ request, response }: Context) {
+export async function routePlain({ request, response }: Context) {
   requestLog(`Plain badge`, request)
 
   const title = request.url.searchParams.get('title') ?? undefined
