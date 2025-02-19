@@ -1,5 +1,4 @@
-<?xml version="1.0" encoding="UTF-8"?>
-<svg width="64" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 240 240" stroke-width="16px" fill="none">
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 240 240" stroke-width="16px" fill="none">
   <g stroke="gray">
     <circle cx="120" cy="120" r="40"/>
     <path d="m201.86,73.75c7.73,13.65,12.14,29.44,12.14,46.25,0,51.91-42.09,94-94,94"/>

@@ -1,8 +1,58 @@
-import { readFileSync } from "node:fs";
-import path from "node:path";
+/* 
+const icons = [
+  'about',
+  'code',
+  'discord',
+  'exp',
+  'html',
+  'node',
+  'slider',
+  'vue',
+  'awesome',
+  'css',
+  'docker',
+  'favicon',
+  'js',
+  'profile',
+  'sql',
+  'webpack',
+  'aws',
+  'daytec',
+  'edu',
+  'gear',
+  'frame',
+  'react',
+  'telegram',
+  'cloud',
+  'deno',
+  'email',
+  'github',
+  'linux',
+  'rs',
+  'test',
+]
+ */
 
-export default function getIcon(name: string) {
-  const icon = readFileSync(path.resolve("public", name), "utf-8");
+class Icons {
+  private _icons: Record<string, string> = {}
 
-  return icon;
+  public get = (name: string): Promise<string> => {
+    return new Promise(resolve => {
+      if (this._icons[name]) {
+        resolve(this._icons[name])
+      } else {
+        return Deno.readTextFile(`./public/icons/${name}.svg`)
+          .then(data => {
+            this._icons[name] = data
+            resolve(data)
+          })
+          .catch(() => {
+            resolve('')
+          })
+      }
+    })
+  }
 }
+
+const getIcon = new Icons().get
+export default getIcon

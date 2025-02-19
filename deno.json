@@ -8,5 +8,15 @@
     "@oak/oak": "jsr:@oak/oak@^17.1.4",
     "@std/assert": "jsr:@std/assert@1",
     "~/": "./"
+  },
+  "fmt": {
+    "useTabs": false,
+    "lineWidth": 120,
+    "indentWidth": 2,
+    "semiColons": false,
+    "singleQuote": true,
+    "proseWrap": "preserve",
+    "include": ["server/", "client/"],
+    "exclude": ["src/testdata/", "src/fixtures/**/*.ts"]
   }
 }

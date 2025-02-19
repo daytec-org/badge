@@ -1,7 +1,7 @@
-Task: 
+Task:
 
 Screenshot:
 
-- [x] 
+- [x]
 
 Additional info:
