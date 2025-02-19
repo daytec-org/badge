@@ -1,5 +1,4 @@
-<?xml version="1.0" encoding="UTF-8"?>
-<svg width="64" height="64" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 64 64" fill="none" stroke-width="4">
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 64 64" fill="none" stroke-width="4">
   <g stroke="#ff0">
     <path stroke-width="7" d="m26.5,50.17c-8.06-2.33-13.95-9.77-13.95-18.57,0-10.68,8.66-19.33,19.33-19.33,5.19,0,9.9,2.04,13.37,5.37"/>
     <line x1="19.07" y1="60.21" x2="21.53" y2="55.01"/>

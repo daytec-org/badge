@@ -7,6 +7,13 @@ interface BadgePlainProps {
   value?: string
 }
 
+async function getSvgIcon(icon?: string) {
+  if (!icon) return ''
+
+  const iconSvg = await getIcon(icon)
+  return iconSvg ? `<svg x="2" y="2" width="16" height="16" ${iconSvg.slice(5)}` : ''
+}
+
 export const badgePlain = async ({ title = 'Badge example', color = '#333', icon, value }: BadgePlainProps) => {
   const shift = icon ? 20 : 0
 
@@ -33,6 +40,6 @@ export const badgePlain = async ({ title = 'Badge example', color = '#333', icon
     <text x="${(w1 * 10) / 2 + shift * 10}" y="140" fill="#fff">${title}</text>
     ${value ? `<text x="${w1 * 10 + (w2 * 10) / 2 + shift * 10}" y="140" fill="#fff">${value}</text>` : ''}
   </g>
-  ${icon ? `<g style="transform: translateX(-${w / 2 - 12}px);">${await getIcon(icon)}</g>` : ''}
+  ${await getSvgIcon(icon)}
 </svg>`
 }
