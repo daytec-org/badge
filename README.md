@@ -24,3 +24,6 @@ example: `http://localhost:3000/plain`
 ## Badges:
 
 - plain [title, color, icon, value]
+- skill [size, title, color, icon, value]
+- stack skill;skill...
+  Example: `/stack/?title=HTML5&value=75&icon=html;title=CSS,SCSS&value=35&icon=css`
