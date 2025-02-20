@@ -2,7 +2,7 @@ import { type Context } from 'jsr:@oak/oak/'
 import { badgeSkill } from '~/src/badge/skill.ts'
 import { requestLog } from '~/src/utils/log.ts'
 
-export async function routeSkill({ request, response }: Context) {
+export async function handleBadgeSkill({ request, response }: Context) {
   requestLog(`Skill badge`, request)
 
   const title = request.url.searchParams.get('title') ?? undefined

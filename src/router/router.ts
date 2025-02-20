@@ -1,13 +1,13 @@
 import { Router } from 'jsr:@oak/oak/router'
-import { favicon } from '~/src/router/favicon.ts'
-import { routePlain } from '~/src/router/plain.ts'
-import { routeSkill } from '~/src/router/skill.ts'
-import { routeStack } from '~/src/router/stack.ts'
+import { handleFavicon } from '~/src/router/favicon.ts'
+import { handleBadgePlain } from '~/src/router/plain.ts'
+import { handleBadgeSkill } from '~/src/router/skill.ts'
+import { handleStack } from '~/src/router/stack.ts'
 
 const router = new Router()
-router.get('/favicon.ico', favicon)
-router.get('/plain', routePlain)
-router.get('/skill', routeSkill)
-router.get('/stack', routeStack)
+router.get('/favicon.ico', handleFavicon)
+router.get('/plain', handleBadgePlain)
+router.get('/skill', handleBadgeSkill)
+router.get('/stack', handleStack)
 
 export default router

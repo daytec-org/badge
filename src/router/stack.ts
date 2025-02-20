@@ -2,7 +2,7 @@ import { type Context } from 'jsr:@oak/oak/'
 import { badgeSkill } from '~/src/badge/skill.ts'
 import { requestLog } from '~/src/utils/log.ts'
 
-export async function routeStack({ request, response }: Context) {
+export async function handleStack({ request, response }: Context) {
   requestLog(`Stack badge`, request)
   const skills = (() => {
     try {
