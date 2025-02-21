@@ -38,9 +38,9 @@ export const badgeSkill = async ({ title, size, color = '#007ec6', icon, value }
   const delay = ~~(Math.random() * 1000)
   const s = getSize(size)
   const lines = title ? title.split(',') : []
-  const dh = lines.length * 16 + (lines.length ? 4 : 0)
+  const dh = lines.length * 20 + (lines.length ? 20 : 0)
   const text = lines.reduce(
-    (acc, curr, i) => `${acc}<text x="${SIZE / 2}" y="${SIZE + (i + 1) * 16}">${curr}</text>`,
+    (acc, curr, i) => `${acc}<text x="${SIZE / 2}" y="${SIZE + (i + 1) * 20}">${curr}</text>`,
     '',
   )
 
@@ -68,7 +68,7 @@ export const badgeSkill = async ({ title, size, color = '#007ec6', icon, value }
 }
   </style>
   <circle r="${radius}" cx="${SIZE / 2}" cy="${SIZE / 2}" fill="#333" />
-  <circle r="${radius}" cx="${SIZE / 2}" cy="${SIZE / 2}" stroke-width="${strokeWidth}" stroke="#888" />
+  <circle r="${radius}" cx="${SIZE / 2}" cy="${SIZE / 2}" stroke-width="${strokeWidth}" stroke="#555" />
   <circle class="chart_${idStr}" r="${radius}" cx="${SIZE / 2}" cy="${SIZE / 2}"/>
   ${await getSvgIcon(icon)}
   <g font-family="Verdana,Arial,Geneva,sans-serif" font-size="16px" fill="#888" text-anchor="middle">${text}</g>
