@@ -1,0 +1,32 @@
+name: Deno deploy
+on:
+  workflow_dispatch:
+
+jobs:
+  deploy:
+    name: Deploy
+    runs-on: ubuntu-latest
+
+    permissions:
+      id-token: write
+      contents: read
+
+    steps:
+      - name: Clone repository
+        uses: actions/checkout@v4
+
+      - name: Install Deno
+        uses: denoland/setup-deno@v2
+        with:
+          deno-version: v2.x
+
+      - name: Create env file
+        run: |
+          touch .env
+          echo APP_PORT=3083 >> .env
+
+      - name: Upload to Deno Deploy
+        uses: denoland/deployctl@v1
+        with:
+          project: 'badge-service'
+          entrypoint: 'main.ts'
