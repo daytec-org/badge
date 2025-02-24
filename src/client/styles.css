@@ -78,6 +78,12 @@ main {
   margin: 0;
 }
 
+.preview {
+  display: flex;
+  align-items: center;
+  gap: 1rem;
+}
+
 .footer {
   text-align: center;
   width: calc(100% - 2rem);

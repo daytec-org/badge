@@ -14,17 +14,25 @@
     <main>
       <h3>Badges:</h3>
       <ul class="badge_list">
-        <li>
+        <li class="badge_list__item">
           <div>plain [title, color, icon, value]</div>
           <div>example: <code>/plain/?title=Node.js&icon=node</code></div>
+          <div class="preview">preview: <img src="http://localhost:3000/plain/?title=Node.js&icon=node" /></div>
         </li>
-        <li>
+        <li class="badge_list__item">
           <div>skill [size, title, color, icon, value]</div>
           <div>example: <code>/skill/?title=React.js&icon=react&value=50</code></div>
+          <div class="preview">
+            preview: <img src="http://localhost:3000/skill/?title=React.js&icon=react&value=50" />
+          </div>
         </li>
-        <li>
+        <li class="badge_list__item">
           <div>stack skill;skill...</div>
-          <div>example: <code>/stack/?title=HTML5&value=75&icon=html;title=CSS,SCSS&value=35&icon=css</code></div>
+          <div>example: <code>/stack/?title=HTML5&value=75&icon=html;title=CSS&value=35&icon=css</code></div>
+          <div class="preview">
+            preview:
+            <img src="http://localhost:3000/stack/?title=HTML5&value=75&icon=html;title=CSS&value=35&icon=css" />
+          </div>
         </li>
       </ul>
     </main>
