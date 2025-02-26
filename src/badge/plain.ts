@@ -25,7 +25,7 @@ export const badgePlain = async ({ title = 'Badge example', color = '#333', icon
   <title>${title}</title>
   <defs>
     <linearGradient id="s" x2="0" y2="100%">
-      <stop offset="0" stop-color="#bbb" stop-opacity=".1" />
+      <stop offset="0" stop-color="#bbb" stop-opacity=".2" />
       <stop offset="1" stop-opacity=".1" />
     </linearGradient>
     <clipPath id="r"><rect width="${w}" height="20" rx="3" fill="#fff" /></clipPath>

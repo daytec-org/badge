@@ -1,0 +1,45 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <link rel="icon" type="image/png" href="/favicon.ico" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Badge service</title>
+    <style>
+      /* css-outlet */
+    </style>
+  </head>
+  <body>
+    <header class="header"><h1>Badge service</h1></header>
+    <main>
+      <h3>Badges:</h3>
+      <ul class="badge_list">
+        <li class="badge_list__item">
+          <div>plain [title, color, icon, value]</div>
+          <div>example: <code>/plain/?title=Node.js&icon=node</code></div>
+          <div class="preview">preview: <img src="http://localhost:3000/plain/?title=Node.js&icon=node" /></div>
+        </li>
+        <li class="badge_list__item">
+          <div>skill [size, title, color, icon, value]</div>
+          <div>example: <code>/skill/?title=React.js&icon=react&value=50</code></div>
+          <div class="preview">
+            preview: <img src="http://localhost:3000/skill/?title=React.js&icon=react&value=50" />
+          </div>
+        </li>
+        <li class="badge_list__item">
+          <div>stack skill;skill...</div>
+          <div>example: <code>/stack/?title=HTML5&value=75&icon=html;title=CSS&value=35&icon=css</code></div>
+          <div class="preview">
+            preview:
+            <img src="http://localhost:3000/stack/?title=HTML5&value=75&icon=html;title=CSS&value=35&icon=css" />
+          </div>
+        </li>
+      </ul>
+    </main>
+    <footer class="footer">
+      <div class="copyright">
+        <span>© 2025 </span><a href="https://github.com/daytec-org" target="_blank">Daytec</a>
+      </div>
+    </footer>
+  </body>
+</html>
