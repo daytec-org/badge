@@ -24,7 +24,7 @@ class Source {
 
         return Deno.readTextFile(`${path}/${filename}`)
           .then(data => {
-            this._source[filename] = data
+            if (scr.includes(ext)) this._source[filename] = data
             resolve(data)
           })
           .catch(error => {
