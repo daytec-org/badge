@@ -1,15 +1,20 @@
 import { bundle } from '@deno/emit'
 
+const scr = ['html', 'js', 'css']
+
 class Source {
   private _source: Record<string, string> = {}
 
-  public get = (name: string): Promise<string> => {
+  public get = (filename: string): Promise<string> => {
     return new Promise(resolve => {
-      if (this._source[name]) {
-        resolve(this._source[name])
+      if (this._source[filename]) {
+        resolve(this._source[filename])
       } else {
-        if (name.endsWith('.js')) {
-          return bundle(`./src/client/${name.split('.')[0]}.ts`)
+        const [name, ext] = filename.split('.')
+        const path = scr.includes(ext) ? './src/client' : './public'
+
+        if (ext === 'js') {
+          return bundle(`${path}/${name}.ts`)
             .then(result => resolve(result.code))
             .catch(error => {
               console.error(error instanceof Error ? error.message : error)
@@ -17,9 +22,9 @@ class Source {
             })
         }
 
-        return Deno.readTextFile(`./src/client/${name}`)
+        return Deno.readTextFile(`${path}/${filename}`)
           .then(data => {
-            this._source[name] = data
+            this._source[filename] = data
             resolve(data)
           })
           .catch(error => {
