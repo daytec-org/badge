@@ -1,5 +1,4 @@
-import { type Context } from 'jsr:@oak/oak/'
-import { requestLog } from '~/src/utils/log.ts'
+import { bundle } from '@deno/emit'
 
 class Source {
   private _source: Record<string, string> = {}
@@ -9,6 +8,15 @@ class Source {
       if (this._source[name]) {
         resolve(this._source[name])
       } else {
+        if (name.endsWith('.js')) {
+          return bundle(`./src/client/${name.split('.')[0]}.ts`)
+            .then(result => resolve(result.code))
+            .catch(error => {
+              console.error(error instanceof Error ? error.message : error)
+              resolve('')
+            })
+        }
+
         return Deno.readTextFile(`./src/client/${name}`)
           .then(data => {
             this._source[name] = data
@@ -23,15 +31,4 @@ class Source {
   }
 }
 
-const getSource = new Source().get
-
-export async function handleMainPage({ request, response }: Context) {
-  requestLog(`Main page`, request)
-
-  const template = await getSource('index.html')
-  const styles = await getSource('styles.css')
-  const output = template.replace('/* css-outlet */', styles)
-
-  response.type = 'text/html; charset=utf-8'
-  response.body = output
-}
+export const getSource = new Source().get

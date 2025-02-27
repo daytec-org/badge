@@ -24,7 +24,6 @@ export async function handleStack({ request, response }: Context) {
       return { ...acc, [name]: value }
     }, {}),
   )
-  console.log(details) // TODO: remove
 
   const arr = await Promise.all(details.map(data => badgeSkill(data)))
 
