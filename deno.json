@@ -1,7 +1,7 @@
 {
   "version": "0.0.2",
   "tasks": {
-    "dev": "deno run --allow-env --env-file=.env --allow-net --allow-read --watch main.ts",
+    "dev": "DEV_MODE=true deno run --allow-env --env-file=.env --allow-net --allow-read --watch main.ts",
     "start": "deno run --allow-env --env-file=.env --allow-net --allow-read main.ts"
   },
   "compilerOptions": {
@@ -15,7 +15,9 @@
     "~/": "./",
     "react": "npm:react",
     "react-dom": "npm:react-dom@^18.2.0",
-    "reactTypes": "npm:@types/react@^18.3"
+    "reactTypes": "npm:@types/react@^18.3",
+    "react-dom/client": "npm:react-dom@18.2.0/client",
+    "react/jsx-runtime": "npm:react@18.2.0/jsx-runtime"
   },
   "fmt": {
     "useTabs": false,

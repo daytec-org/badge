@@ -7,7 +7,10 @@ class Source {
 
   public get = (filename: string): Promise<string> => {
     return new Promise(resolve => {
-      if (this._source[filename]) {
+      const DEV_MODE = Boolean(Deno.env.get('DEV_MODE'))
+
+      if (!DEV_MODE && this._source[filename]) {
+        // if (this._source[filename]) {
         resolve(this._source[filename])
       } else {
         const [name, ext] = filename.split('.')
