@@ -10,7 +10,6 @@ class Source {
       const DEV_MODE = Boolean(Deno.env.get('DEV_MODE'))
 
       if (!DEV_MODE && this._source[filename]) {
-        // if (this._source[filename]) {
         resolve(this._source[filename])
       } else {
         const [name, ext] = filename.split('.')
@@ -18,7 +17,9 @@ class Source {
 
         if (ext === 'js') {
           return bundle(`${path}/${name}.ts`)
-            .then(result => resolve(result.code))
+            .then(result => {
+              resolve(result.code)
+            })
             .catch(error => {
               console.error(error instanceof Error ? error.message : error)
               resolve('')

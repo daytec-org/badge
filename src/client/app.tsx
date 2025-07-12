@@ -1,8 +1,4 @@
-import { jsx as _jsx } from 'react/jsx-runtime'
-
-/** @react npm:react@^18.3 */
-/** @reactTypes npm:@types/react@^18.3 */
-/** @jsxImportSource npm:react */
+/** @jsxImportSource https://esm.sh/react@18.2.0 */
 
 export const App = () => {
   return (
