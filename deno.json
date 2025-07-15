@@ -12,11 +12,10 @@
     "@deno/emit": "jsr:@deno/emit@^0.46.0",
     "@oak/oak": "jsr:@oak/oak@^17.1.4",
     "@std/assert": "jsr:@std/assert@1",
-    "~/": "./",
     "react": "https://esm.sh/react@18.2.0",
-    "react-dom/client": "https://esm.sh/react-dom@18.2.0/client",
+    "react-dom": "https://esm.sh/react-dom@18.2.0/client",
     "react/jsx-runtime": "https://esm.sh/react/jsx-runtime",
-    "react-dom/server": "npm:react-dom@^18.2.0/server"
+    "~/": "./"
   },
   "fmt": {
     "useTabs": false,
@@ -27,5 +26,10 @@
     "proseWrap": "preserve",
     "include": ["server/", "client/"],
     "exclude": ["src/testdata/", "src/fixtures/**/*.ts"]
+  },
+  "lint": {
+    "rules": {
+      "tags": ["react"]
+    }
   }
 }
