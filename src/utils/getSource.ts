@@ -1,5 +1,6 @@
 import { bundle } from '@deno/emit'
 
+const DEV_MODE = Boolean(Deno.env.get('DEV_MODE'))
 const scr = ['html', 'js', 'css']
 
 class Source {
@@ -7,7 +8,7 @@ class Source {
 
   public get = (filename: string): Promise<string> => {
     return new Promise(resolve => {
-      if (this._source[filename]) {
+      if (!DEV_MODE && this._source[filename]) {
         resolve(this._source[filename])
       } else {
         const [name, ext] = filename.split('.')
@@ -15,7 +16,10 @@ class Source {
 
         if (ext === 'js') {
           return bundle(`${path}/${name}.ts`)
-            .then(result => resolve(result.code))
+            .then(result => {
+              if (!DEV_MODE) this._source[filename] = result.code
+              resolve(result.code)
+            })
             .catch(error => {
               console.error(error instanceof Error ? error.message : error)
               resolve('')
