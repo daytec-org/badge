@@ -46,6 +46,24 @@
   }
 }
 
+:root.theme-light {
+  --color-scheme: 1;
+  --color00: #fff;
+  --color10: #f5f5f5;
+  --color20: #e0e0e0;
+  --color30: #b8b8b8;
+  --color40: #999;
+  --color50: #7a7a7a;
+  --color60: #5c5c5c;
+  --color70: #3d3d3d;
+  --color80: #292929;
+  --color90: #141414;
+  --color100: #000;
+
+  --link-color: #386989;
+  --link-color-hover: #4c9ce2;
+}
+
 html {
   color: var(--color100);
   background-color: var(--color00);
@@ -125,12 +143,23 @@ a:hover {
 
 /*/////////////////////////////////////////////////////////*/
 .header__logo {
-  width: 32px;
-  height: 32px;
+  width: 45px;
+  height: 45px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  background-color: #000000;
+  border-radius: 50%;
+
+  & img {
+    width: 1.8rem;
+    height: 1.8rem;
+  }
 }
 
 .header__title {
   display: flex;
+  align-items: center;
   gap: 1rem;
 }
 
@@ -151,11 +180,15 @@ a:hover {
   align-items: center;
   cursor: pointer;
   transition: all 0.2s ease-in-out;
+
+  &:hover {
+    opacity: 0.5;
+  }
 }
 
-.header__theme:hover {
+/* .header__theme:hover {
   opacity: 0.5;
-}
+} */
 
 .header__theme img {
   width: 20px;
@@ -165,3 +198,15 @@ a:hover {
   margin: 0;
   font-size: 1.5rem;
 } */
+
+.header__theme_switcher {
+  position: absolute;
+  margin: 0;
+  outline: none;
+  appearance: none;
+  font-size: 1em;
+  width: 2.2em;
+  height: 1.1em;
+  cursor: pointer;
+  z-index: 1;
+}
