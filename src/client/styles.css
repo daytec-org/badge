@@ -55,7 +55,8 @@ body {
   position: relative;
   width: 100%;
   min-height: 100dvh;
-  max-width: 720px;
+  /* max-width: 720px; */
+  max-width: 1440px;
   min-height: 100dvh;
   margin: 0 auto;
   display: flex;
@@ -69,13 +70,31 @@ main {
 }
 
 .header {
+  box-sizing: border-box;
   text-align: center;
   width: calc(100% - 2rem);
-  margin: 0 1rem 2rem;
+  /* margin: 0.5rem 1rem; */
+
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  text-align: center;
+  /* width: 100%; */
+  /* width: calc(100% - 2rem); */
+  /* margin: 1rem 1rem 2rem; */
+  padding: 0.5rem 1rem;
   border-bottom: 2px solid var(--color50);
+  /* background-color: var(--color50);
+  color: var(--color00); */
 }
-.header h1 {
-  margin: 0;
+.header a {
+  /* margin: 0;
+  width: 100%;
+  display: flex;
+  justify-content: space-between; */
+  font-size: 1.4rem;
+  text-decoration: none;
+  color: var(--color100);
 }
 
 .preview {
@@ -103,3 +122,46 @@ a:hover {
 .badge_list li {
   margin: 0.5rem;
 }
+
+/*/////////////////////////////////////////////////////////*/
+.header__logo {
+  width: 32px;
+  height: 32px;
+}
+
+.header__title {
+  display: flex;
+  gap: 1rem;
+}
+
+#root {
+  width: 100%;
+  height: 100vh;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: space-between;
+}
+
+.header__theme {
+  width: 32px;
+  height: 32px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  cursor: pointer;
+  transition: all 0.2s ease-in-out;
+}
+
+.header__theme:hover {
+  opacity: 0.5;
+}
+
+.header__theme img {
+  width: 20px;
+  height: 20px;
+}
+/* .header__title h1 {
+  margin: 0;
+  font-size: 1.5rem;
+} */

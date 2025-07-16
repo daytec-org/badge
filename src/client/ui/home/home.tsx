@@ -1,10 +1,10 @@
-import React from "https://esm.sh/react@18.2.0"
+import React from 'https://esm.sh/react@18.2.0'
 
 const API_URL = 'http://localhost:3000' //'https://badge-service.deno.dev'
 
 export const Home = () => {
   return (
-    <main>
+    <main className="main">
       <h3>Badges:</h3>
       <ul className="badge_list">
         <li className="badge_list__item">
@@ -32,7 +32,9 @@ export const Home = () => {
           </div>
           <div className="preview">
             preview:
-            <img src={`${API_URL}/stack/?title=HTML5&value=80&icon=html;title=CSS&value=70&icon=css;title=JavaScript,TypeScript&value=80&icon=js`} />
+            <img
+              src={`${API_URL}/stack/?title=HTML5&value=80&icon=html;title=CSS&value=70&icon=css;title=JavaScript,TypeScript&value=80&icon=js`}
+            />
           </div>
         </li>
       </ul>
