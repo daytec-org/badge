@@ -12,7 +12,7 @@ export const Home = () => {
       </div>
       <Constructor />
       <div>
-        <h3 className="home__title">Preview</h3>
+        <h3 className="home__title">Examples</h3>
         <ul className="home__badges">
           <li className="home__badge_item">
             <h3>Plain badges</h3>
@@ -41,39 +41,6 @@ export const Home = () => {
           </li>
         </ul>
       </div>
-
-      {/* <ul className="badge_list">
-        <li className="badge_list__item">
-          <div>plain [title, color, icon, value]</div>
-          <div>
-            example: <code>/plain/?title=Node.js&icon=node</code>
-          </div>
-          <div className="preview">
-            preview: <img src={`${API_URL}/plain/?title=Node.js&icon=node`} />
-          </div>
-        </li>
-        <li className="badge_list__item">
-          <div>skill [size, title, color, icon, value]</div>
-          <div>
-            example: <code>/skill/?title=React.js&icon=react&value=50</code>
-          </div>
-          <div className="preview">
-            preview: <img src={`${API_URL}/skill/?title=React.js&icon=react&value=50`} />
-          </div>
-        </li>
-        <li className="badge_list__item">
-          <div>stack skill;skill...</div>
-          <div>
-            example: <code>/stack/?title=HTML5&value=75&icon=html;title=CSS&value=35&icon=css</code>
-          </div>
-          <div className="preview">
-            preview:
-            <img
-              src={`${API_URL}/stack/?title=HTML5&value=80&icon=html;title=CSS&value=70&icon=css;title=JavaScript,TypeScript&value=80&icon=js`}
-            />
-          </div>
-        </li>
-      </ul> */}
     </main>
   )
 }

@@ -24,9 +24,9 @@ export const Constructor = () => {
   ])
   const [showIconDropdown, setShowIconDropdown] = React.useState(false)
   const [stackIconDropdown, setStackIconDropdown] = React.useState([false])
-
   const [filteredIcons, setFilteredIcons] = React.useState(iconOptions)
   const [resultUrl, setResultUrl] = React.useState('')
+  const [showCopied, setShowCopied] = React.useState(false)
 
   const handleTypeChange = (event: React.ChangeEvent<HTMLSelectElement>) => {
     setBadgeType(event.target.value)
@@ -72,15 +72,14 @@ export const Constructor = () => {
       const updatedItems = [...stackItems]
       updatedItems[index].icon = icon
       setStackItems(updatedItems)
-      // setShowIconDropdown(false)
       setStackIconDropdown(prev => prev.map((el, i) => (i === index ? false : el)))
     }
   }
 
   const handleCreateBadge = (e: React.FormEvent, type: string) => {
     e.preventDefault()
-    setResultUrl('')
-    switch (type) {
+    console.log(resultUrl)
+    switch (badgeType) {
       case 'plain':
         {
           setResultUrl(`/${badgeType}?${new URLSearchParams(plainFields).toString()}`)
@@ -99,11 +98,12 @@ export const Constructor = () => {
 
             temp += a
           })
-          temp = resultUrl.slice(0, -1)
+          temp = temp.slice(0, -1)
           setResultUrl(temp)
         }
         break
     }
+    console.log(resultUrl)
   }
   const createFields = (fields: Record<string, string>, index: number = 0) => {
     return (
@@ -184,14 +184,15 @@ export const Constructor = () => {
     )
   }
 
-  const copyToClipboard = (text: string) => {
+  const handleCopy = (text: string) => {
     navigator.clipboard
       .writeText(text)
       .then(() => {
-        alert('URL скопирован в буфер обмена!')
+        setShowCopied(true)
+        setTimeout(() => setShowCopied(false), 1000)
       })
       .catch(err => {
-        console.error('Ошибка при копировании: ', err)
+        console.error('Failed to copy: ', err)
       })
   }
 
@@ -208,52 +209,18 @@ export const Constructor = () => {
       </label>
       {constructorForm(badgeType)}
 
-      <div
-        style={{
-          marginTop: '30px',
-          padding: '15px',
-          background: '#000',
-          borderRadius: '5px',
-          position: 'relative',
-        }}
-      >
-        <h3>Result URL:</h3>
-        <div
-          className="home__result_url"
-          // style={{
-          //   display: 'flex',
-          //   alignItems: 'center',
-          //   justifyContent: 'space-between',
-          //   background: 'black',
-          //   padding: '10px',
-          //   borderRadius: '4px',
-          //   border: '1px solid #ddd',
-          //   cursor: 'pointer',
-          // }}
-          onClick={() => copyToClipboard(resultUrl)}
-        >
-          <code style={{ overflow: 'hidden', textOverflow: 'ellipsis' }}>{resultUrl}</code>
-          {/* <svg
-            xmlns="http://www.w3.org/2000/svg"
-            width="16"
-            height="16"
-            fill="currentColor"
-            viewBox="0 0 16 16"
-            style={{ marginLeft: '10px', flexShrink: 0 }}
-            onClick={e => {
-              e.stopPropagation() // Предотвращаем всплытие события
-              copyToClipboard(resultUrl)
-            }}
-          > */}
-          {resultUrl && (
+      <div>
+        <p>Result:</p>
+        {resultUrl && (
+          <div className="home__result_url" onClick={() => handleCopy(resultUrl)}>
+            <code style={{ overflow: 'hidden', textOverflow: 'ellipsis' }}>{resultUrl}</code>
+
             <div className="home__copy">
               <img src={`${API_URL}/img/copy`} alt="Copy Icon" />
+              {showCopied && <div className="home__copy_notification">Copied</div>}
             </div>
-          )}
-          {/* <path d="M4 1.5H3a2 2 0 0 0-2 2V14a2 2 0 0 0 2 2h10a2 2 0 0 0 2-2V3.5a2 2 0 0 0-2-2h-1v1h1a1 1 0 0 1 1 1V14a1 1 0 0 1-1 1H3a1 1 0 0 1-1-1V3.5a1 1 0 0 1 1-1h1v-1z" />
-            <path d="M9.5 1a.5.5 0 0 1 .5.5v1a.5.5 0 0 1-.5.5h-3a.5.5 0 0 1-.5-.5v-1a.5.5 0 0 1 .5-.5h3zm-3-1A1.5 1.5 0 0 0 5 1.5v1A1.5 1.5 0 0 0 6.5 4h3A1.5 1.5 0 0 0 11 2.5v-1A1.5 1.5 0 0 0 9.5 0h-3z" />
-          </svg> */}
-        </div>
+          </div>
+        )}
       </div>
     </div>
   )

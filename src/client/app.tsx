@@ -6,11 +6,9 @@ import { Footer } from './ui/footer/footer.tsx'
 export const App = () => {
   return (
     <>
-      {/* // <div className="app"> */}
       <Header />
       <Home />
       <Footer />
-      {/* // </div> */}
     </>
   )
 }
