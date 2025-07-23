@@ -1,6 +1,5 @@
 import React from 'https://esm.sh/react@18.2.0'
-
-const API_URL = 'http://localhost:3000' //'https://badge-service.deno.dev'
+import { API_URL } from '../../../const.ts'
 
 export const Header = () => {
   const [theme, setTheme] = React.useState('dark')
@@ -20,9 +19,19 @@ export const Header = () => {
         </div>
         <div> Badge service</div>
       </a>
-      <div className="header__theme">
-        <input className="header__theme_switcher" type="checkbox" checked={theme === 'dark'} onChange={handleChange} />
-        <img src={`${API_URL}/img/${theme}`} alt="theme" />
+      <div className="header__right">
+        <a href="https://github.com/daytec-org/badge" target="_blank">
+          GitHub
+        </a>
+        <div className="header__theme">
+          <input
+            className="header__theme_switcher"
+            type="checkbox"
+            checked={theme === 'dark'}
+            onChange={handleChange}
+          />
+          <img src={`${API_URL}/img/${theme}`} alt="theme" />
+        </div>
       </div>
     </header>
   )

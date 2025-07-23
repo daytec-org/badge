@@ -1,7 +1,6 @@
 import React from 'https://esm.sh/react@18.2.0'
 import { Constructor } from '../constructor/constructor.tsx'
-
-export const API_URL = 'http://localhost:3000' //'https://badge-service.deno.dev'
+import { API_URL } from '../../../const.ts'
 
 export const Home = () => {
   return (

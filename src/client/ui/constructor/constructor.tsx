@@ -1,8 +1,8 @@
-import React from 'https://esm.sh/react@18.2.0'
-import { API_URL } from '../home/home.tsx'
+import React, { useEffect, useMemo } from 'https://esm.sh/react@18.2.0'
+import { API_URL } from '../../../const.ts'
 
 export const Constructor = () => {
-  const iconOptions = ['react', 'deno', 'docker', 'js', 'node', 'python', 'ts', 'vite']
+  const [iconOptions, setIconOptions] = React.useState<string[]>([])
   const [badgeType, setBadgeType] = React.useState('plain')
   const [plainFields, setPlainFields] = React.useState({
     title: '',
@@ -27,6 +27,15 @@ export const Constructor = () => {
   const [filteredIcons, setFilteredIcons] = React.useState(iconOptions)
   const [resultUrl, setResultUrl] = React.useState('')
   const [showCopied, setShowCopied] = React.useState(false)
+
+  useEffect(() => {
+    const fetchIcons = async () => {
+      const icons = await fetch(`${API_URL}/icons`).then(res => res.json())
+      setIconOptions(icons)
+      setFilteredIcons(icons)
+    }
+    fetchIcons()
+  }, [])
 
   const handleTypeChange = (event: React.ChangeEvent<HTMLSelectElement>) => {
     setBadgeType(event.target.value)
@@ -78,7 +87,6 @@ export const Constructor = () => {
 
   const handleCreateBadge = (e: React.FormEvent, type: string) => {
     e.preventDefault()
-    console.log(resultUrl)
     switch (badgeType) {
       case 'plain':
         {
@@ -95,7 +103,6 @@ export const Constructor = () => {
           let temp = `/${badgeType}?`
           stackItems.map(item => {
             const a = `${new URLSearchParams(item).toString()};`
-
             temp += a
           })
           temp = temp.slice(0, -1)
@@ -103,7 +110,6 @@ export const Constructor = () => {
         }
         break
     }
-    console.log(resultUrl)
   }
   const createFields = (fields: Record<string, string>, index: number = 0) => {
     return (
@@ -151,7 +157,8 @@ export const Constructor = () => {
     )
   }
 
-  const stackFields = () => {
+  const createStackFields = () => {
+    console.log('createStackFields')
     return (
       <>
         {stackItems.map((item, index) => createFields(item, index))}
@@ -176,7 +183,7 @@ export const Constructor = () => {
       <form className="home__form">
         {type === 'plain' && createFields(plainFields)}
         {type === 'skill' && createFields(skillFields)}
-        {type === 'stack' && stackFields()}
+        {type === 'stack' && createStackFields()}
         <button className="home__submit_btn" type="submit" onClick={e => handleCreateBadge(e, type)}>
           Create
         </button>

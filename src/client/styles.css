@@ -122,6 +122,12 @@ main {
   color: var(--color100);
 }
 
+.header__right {
+  display: flex;
+  align-items: center;
+  gap: 1rem;
+}
+
 .preview {
   display: flex;
   align-items: center;
