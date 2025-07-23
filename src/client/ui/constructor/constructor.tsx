@@ -117,6 +117,7 @@ export const Constructor = () => {
         {Object.entries(fields).map(([key, value]) => {
           if (key === 'icon') {
             const isShown = badgeType === 'stack' ? stackIconDropdown[index] : showIconDropdown
+
             return (
               <div key={key} className="home__icon_container">
                 <input
@@ -158,7 +159,6 @@ export const Constructor = () => {
   }
 
   const createStackFields = () => {
-    console.log('createStackFields')
     return (
       <>
         {stackItems.map((item, index) => createFields(item, index))}
@@ -215,13 +215,11 @@ export const Constructor = () => {
         </select>
       </label>
       {constructorForm(badgeType)}
-
       <div>
         <p>Result:</p>
         {resultUrl && (
           <div className="home__result_url" onClick={() => handleCopy(resultUrl)}>
             <code style={{ overflow: 'hidden', textOverflow: 'ellipsis' }}>{resultUrl}</code>
-
             <div className="home__copy">
               <img src={`${API_URL}/img/copy`} alt="Copy Icon" />
               {showCopied && <div className="home__copy_notification">Copied</div>}
