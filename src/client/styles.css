@@ -359,6 +359,7 @@ a:hover {
   margin: 0;
   padding: 0;
   cursor: pointer;
+  filter: invert(var(--color-scheme));
 }
 
 .home__copy_notification {
