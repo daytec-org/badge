@@ -19,20 +19,10 @@ export const Header = () => {
         </div>
         <div> Badge service</div>
       </a>
-      <div className="header__right">
-        <a href="https://github.com/daytec-org/badge" target="_blank">
-          GitHub
-        </a>
-        <div className="header__theme">
-          <input
-            className="header__theme_switcher"
-            type="checkbox"
-            checked={theme === 'dark'}
-            onChange={handleChange}
-          />
-          <img src={`${API_URL}/img/${theme}`} alt="theme" />
-        </div>
-      </div>
+      <label className="header__theme">
+        <input type="checkbox" checked={theme === 'dark'} onChange={handleChange} />
+        <img src={`${API_URL}/img/${theme}`} alt="theme" />
+      </label>
     </header>
   )
 }

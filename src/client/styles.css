@@ -72,19 +72,11 @@
 
 html {
   color: var(--color100);
-  background-color: var(--color10);
+  background-color: var(--color00);
 }
 
 body {
-  position: relative;
-  width: 100%;
-  max-width: 1440px;
-  margin: 0 auto;
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  justify-content: center;
-  background-color: var(--color00);
+  margin: 0;
 }
 
 #root {
@@ -92,8 +84,6 @@ body {
   display: flex;
   flex-direction: column;
   align-items: center;
-  border-left: 1px solid var(--color-accent50);
-  border-right: 1px solid var(--color-accent50);
 }
 
 main {
@@ -108,14 +98,14 @@ main {
   box-sizing: border-box;
   text-align: center;
   width: 100%;
-
   display: flex;
   justify-content: space-between;
   align-items: center;
   text-align: center;
   padding: 0.5rem 1rem;
-  border-bottom: 2px solid var(--color50);
+  background-color: var(--color20);
 }
+
 .header a {
   font-size: 1.4rem;
   text-decoration: none;
@@ -140,7 +130,7 @@ main {
   width: 100%;
   margin: 2rem 1rem 0;
   padding: 0.5rem 1rem;
-  border-top: 2px solid var(--color50);
+  background-color: var(--color20);
 }
 
 a {
@@ -148,6 +138,7 @@ a {
   text-decoration: none;
   transition-duration: 250ms;
 }
+
 a:hover {
   color: var(--link-color-hover);
 }
@@ -157,8 +148,8 @@ a:hover {
 }
 
 .header__logo {
-  width: 45px;
-  height: 45px;
+  width: 2.8rem;
+  height: 2.8rem;
   display: flex;
   justify-content: center;
   align-items: center;
@@ -178,8 +169,8 @@ a:hover {
 }
 
 .header__theme {
-  width: 32px;
-  height: 32px;
+  width: 1.8rem;
+  height: 1.8rem;
   display: flex;
   justify-content: center;
   align-items: center;
@@ -192,20 +183,12 @@ a:hover {
 }
 
 .header__theme img {
-  width: 20px;
-  height: 20px;
+  width: 1.8rem;
+  height: 1.8rem;
 }
 
-.header__theme_switcher {
-  position: absolute;
-  margin: 0;
-  outline: none;
-  appearance: none;
-  font-size: 1em;
-  width: 2.2em;
-  height: 1.1em;
-  cursor: pointer;
-  z-index: 1;
+.header__theme input[type='checkbox'] {
+  display: none;
 }
 
 .home__info {
@@ -213,10 +196,9 @@ a:hover {
   width: 100%;
   padding: 0.5rem;
   text-align: center;
-  border-bottom: 1px solid var(--color-accent50);
 }
 
-.home__badges {
+.list__badges {
   list-style: none;
   margin: 0 auto;
   padding: 0;
@@ -289,7 +271,7 @@ a:hover {
   top: 100%;
   left: 0;
   right: 0;
-  max-height: 200px;
+  max-height: 11.5rem;
   overflow-y: auto;
   border: 1px solid var(--color100);
   background-color: var(--color00);
@@ -329,9 +311,9 @@ a:hover {
 .home__submit_btn {
   width: 8rem;
   padding: 0.5rem;
-  background-color: var(--color-accent50);
   color: var(--color100);
-  border: 1px solid var(--color-accent50);
+  background-color: var(--color-accent50);
+  border: none;
   border-radius: 8px;
   font-size: 1rem;
   cursor: pointer;
@@ -363,11 +345,6 @@ a:hover {
 }
 
 .home__copy_notification {
-  position: absolute;
-  background-color: var(--color30);
-  padding: 0.2rem 0.4rem;
-  border-radius: 5px;
-  font-size: 0.8rem;
   animation: fadeInOut 1s;
 }
 

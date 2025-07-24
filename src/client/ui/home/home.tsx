@@ -12,7 +12,7 @@ export const Home = () => {
       <Constructor />
       <div>
         <h3 className="home__title">Examples</h3>
-        <ul className="home__badges">
+        <ul className="list__badges">
           <li className="home__badge_item">
             <h3>Plain badges</h3>
             <div className="preview">
