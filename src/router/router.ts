@@ -5,6 +5,7 @@ import { handleSource } from '~/src/router/client/src.ts'
 import { handleBadgePlain } from '~/src/router/badge/plain.ts'
 import { handleBadgeSkill } from '~/src/router/badge/skill.ts'
 import { handleStack } from '~/src/router/badge/stack.ts'
+import { handleImage } from './client/image.ts'
 import { handleIconList } from '~/src/router/service/icons.ts'
 
 const router = new Router()
@@ -19,4 +20,5 @@ router.get('/', handleMainPage)
 router.get('/favicon.ico', handleFavicon)
 router.get('/:file', handleSource)
 
+router.get('/img/:file', handleImage)
 export default router
