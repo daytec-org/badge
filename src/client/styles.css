@@ -203,7 +203,6 @@ a:hover {
 .home__constructor,
 .home__examples {
   box-sizing: border-box;
-  width: 100%;
   padding: 0.5rem;
   text-align: center;
 }
@@ -228,7 +227,6 @@ a:hover {
     border-left: 1px solid var(--color20);
     top: 0%;
     right: 0%;
-    /* transform: translateY(-50%); */
   }
 }
 
