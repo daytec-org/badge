@@ -3,6 +3,7 @@ import { Header } from './ui/header/header.tsx'
 import { Home } from './ui/home/home.tsx'
 import { Footer } from './ui/footer/footer.tsx'
 import { Modal } from './ui/modal/modal.tsx'
+import { Message } from './ui/message/message.tsx'
 
 export const App = () => {
   return (
@@ -11,6 +12,7 @@ export const App = () => {
       <Home />
       <Footer />
       <Modal />
+      <Message />
     </>
   )
 }

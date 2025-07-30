@@ -1,5 +1,6 @@
 import React from 'https://esm.sh/react@18.2.0'
 import { API_URL } from '../../../const.ts'
+import { Message } from '../message/message.tsx'
 
 interface BadgeProps {
   title: string
@@ -183,9 +184,11 @@ export const Constructor = () => {
       .then(() => {
         setShowCopied(true)
         setTimeout(() => setShowCopied(false), 1000)
+        Message.show('Copied to clipboard', 'regular')
       })
       .catch(err => {
         console.error('Failed to copy: ', err)
+        Message.show('Failed to copy', 'error')
       })
   }
 
