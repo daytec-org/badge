@@ -221,15 +221,9 @@ a:hover {
   text-align: center;
 }
 
-.home__select {
-  width: 8rem;
-  margin: 0.5rem;
-  padding: 0.5rem;
-  color: var(--color100);
-  background-color: var(--color00);
-  border: 1px solid var(--color100);
-  border-radius: 8px;
-  font-size: 1rem;
+.home__select_container {
+  width: 12rem;
+  margin: 0 auto;
 }
 
 .home__form {
@@ -368,6 +362,7 @@ a:hover {
 }
 
 /*Modal*/
+
 .modal__outer {
   position: fixed;
   z-index: 900;
@@ -435,6 +430,7 @@ a:hover {
 }
 
 /*Message*/
+
 .messages {
   position: fixed;
   z-index: 1000;
@@ -496,4 +492,46 @@ a:hover {
     opacity: 0;
     transform: translateX(100%);
   }
+}
+
+/*Select*/
+
+.select {
+  flex: 0 1 40%;
+  position: relative;
+  min-width: 12rem;
+  box-sizing: border-box;
+  padding: 0 0.6rem;
+  border: 2px solid var(--color50);
+  background-color: var(--color10);
+  color: var(--color100);
+  font-size: 1rem;
+  transition: background-color 0.25s linear, border-color 0.25s linear;
+
+  &:hover {
+    border-color: var(--color60);
+    background-color: var(--color20);
+  }
+}
+
+.select__element {
+  width: 100%;
+  padding: 1rem 0 0.6rem;
+  border: none;
+  background-color: inherit;
+  color: inherit;
+  font-size: 1rem;
+  line-height: 1.5;
+  -webkit-text-fill-color: var(--color100);
+}
+
+.select__placeholder {
+  position: absolute;
+  top: 0;
+  left: 0.6rem;
+  color: inherit;
+  opacity: 0.7;
+  font-size: 0.8em;
+  pointer-events: none;
+  transition: 0.3s ease all;
 }

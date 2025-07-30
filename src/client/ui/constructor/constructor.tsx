@@ -1,6 +1,7 @@
 import React from 'https://esm.sh/react@18.2.0'
 import { API_URL } from '../../../const.ts'
 import { Message } from '../message/message.tsx'
+import { Select } from '../select/select.tsx'
 
 interface BadgeProps {
   title: string
@@ -37,8 +38,8 @@ export const Constructor = () => {
     fetchIcons()
   }, [])
 
-  const handleTypeChange = (event: React.ChangeEvent<HTMLSelectElement>) => {
-    setBadgeType(event.target.value)
+  const handleTypeChange = (value: string) => {
+    setBadgeType(value)
     setShowIconDropdown(false)
     setStackIconDropdown(prev => prev.map(() => false))
   }
@@ -195,14 +196,15 @@ export const Constructor = () => {
   return (
     <div className="home__info">
       <h3 className="home__title">Constructor</h3>
-      <label>
-        Select type of badge:
-        <select className="home__select" value={badgeType} onChange={handleTypeChange}>
-          <option value="plain">plain</option>
-          <option value="skill">skill</option>
-          <option value="stack">stack</option>
-        </select>
-      </label>
+      <div className="home__select_container">
+        <Select
+          options={['plain', 'skill', 'stack']}
+          name="select"
+          placeholder="Select type of badge"
+          defaultValue="plain"
+          onChange={value => handleTypeChange(value)}
+        />
+      </div>
       {constructorForm(badgeType)}
       <div>
         <p>Result:</p>
