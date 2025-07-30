@@ -1,5 +1,7 @@
 import React from 'https://esm.sh/react@18.2.0'
-import { API_URL } from '../../../const.ts'
+import { ENV } from '@/config'
+
+const { API_URL } = ENV
 
 interface ModalComponent {
   show: (children?: React.ReactNode) => void

@@ -12,6 +12,7 @@
     "lib": ["dom", "dom.iterable", "deno.ns"]
   },
   "imports": {
+    "@/config": "./src/config.prod.ts",
     "@deno/emit": "jsr:@deno/emit@^0.46.0",
     "@oak/oak": "jsr:@oak/oak@^17.1.4",
     "@std/assert": "jsr:@std/assert@1",

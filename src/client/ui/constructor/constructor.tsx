@@ -1,8 +1,9 @@
 import React from 'https://esm.sh/react@18.2.0'
-import { API_URL } from '../../../const.ts'
 import { Message } from '../message/message.tsx'
 import { Select } from '../select/select.tsx'
+import { ENV } from '@/config'
 
+const { API_URL } = ENV
 interface BadgeProps {
   title: string
   color?: string

@@ -1,6 +1,8 @@
 import React from 'https://esm.sh/react@18.2.0'
-import { API_URL } from '../../../const.ts'
+import { ENV } from '@/config'
 import { Theme } from '../theme/theme.tsx'
+
+const { API_URL } = ENV
 
 export const Header = () => {
   return (
