@@ -12,6 +12,7 @@ interface BadgeProps {
 }
 
 export const Constructor = () => {
+  const BADGE_TYPE = ['plain', 'skill', 'stack']
   const [iconOptions, setIconOptions] = React.useState<string[]>([])
   const [badgeType, setBadgeType] = React.useState('plain')
   const [fields, setFields] = React.useState<BadgeProps>({ title: '', color: '', icon: '', value: '' })
@@ -32,7 +33,7 @@ export const Constructor = () => {
     const fetchIcons = async () => {
       const icons = await fetch(`${API_URL}/icons`)
         .then(res => res.json())
-        .catch(console.error)
+        .catch(error => Message.show(error.message, 'error'))
       setIconOptions(icons)
       setFilteredIcons(icons)
     }
@@ -188,10 +189,7 @@ export const Constructor = () => {
         setTimeout(() => setShowCopied(false), 1000)
         Message.show('Copied to clipboard', 'regular')
       })
-      .catch(err => {
-        console.error('Failed to copy: ', err)
-        Message.show('Failed to copy', 'error')
-      })
+      .catch(error => Message.show(<div>Failed to copy: {error.message}</div>, 'error'))
   }
 
   return (
@@ -199,7 +197,7 @@ export const Constructor = () => {
       <h3 className="home__title">Constructor</h3>
       <div className="home__select_container">
         <Select
-          options={['plain', 'skill', 'stack']}
+          options={BADGE_TYPE}
           name="select"
           placeholder="Select type of badge"
           defaultValue="plain"
