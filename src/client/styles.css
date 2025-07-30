@@ -81,9 +81,11 @@ body {
 
 #root {
   width: 100%;
+  height: 100vh;
   display: flex;
   flex-direction: column;
   align-items: center;
+  justify-content: space-between;
 }
 
 main {
@@ -191,11 +193,43 @@ a:hover {
   display: none;
 }
 
-.home__info {
+.home__main {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+
+.home__welcome,
+.home__constructor,
+.home__examples {
   box-sizing: border-box;
   width: 100%;
   padding: 0.5rem;
   text-align: center;
+}
+
+@media (min-width: 840px) {
+  .home__main {
+    align-items: start;
+  }
+
+  .home__welcome,
+  .home__examples {
+    width: calc(100% - 25rem);
+  }
+
+  .home__constructor {
+    width: 25rem;
+    height: 100vh;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    position: absolute;
+    border-left: 1px solid var(--color20);
+    top: 0%;
+    right: 0%;
+    /* transform: translateY(-50%); */
+  }
 }
 
 .list__badges {

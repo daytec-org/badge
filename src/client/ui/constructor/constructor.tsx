@@ -194,7 +194,7 @@ export const Constructor = () => {
   }
 
   return (
-    <div className="home__info">
+    <div className="home__constructor">
       <h3 className="home__title">Constructor</h3>
       <div className="home__select_container">
         <Select
