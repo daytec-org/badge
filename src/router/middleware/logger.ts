@@ -1,7 +1,6 @@
 import type { Middleware, Context } from "jsr:@oak/oak";
-import { FileLogger } from '~/src/utils/fileLogger.ts'
+import { logger } from '~/src/utils/logger.ts';
 
-const fileLogger = new FileLogger();
 const colors = {
   GET: '\x1b[32m', // Green
   POST: '\x1b[34m', // Blue
@@ -42,8 +41,8 @@ export const loggerMiddleware: Middleware = async (ctx: Context, next: () => Pro
 
   console.log(`[${coloredMethod}] ${route} ${statusColor}${status}${colors.reset} (${duration}ms)`);
 
-  const logEntry = `[${timestamp}] [${method}] ${route} ${status} (${duration}ms)\n`;
-  await fileLogger.log("info", logEntry);
+  const logEntry = `[${timestamp}] [${method}] ${route} ${status} (${duration}ms)`;
+  logger.log("info", logEntry);
 };
 
 export const exceptionFilter: Middleware = async (ctx: Context, next: () => Promise<unknown>) => {
@@ -53,8 +52,8 @@ export const exceptionFilter: Middleware = async (ctx: Context, next: () => Prom
 
     console.error(`${colors.error}${message}${colors.reset}`);
 
-    const logEntry = `[${timestamp}] ${message}\n`;
-    fileLogger.log("error", logEntry).catch(() => { });
+    const logEntry = `[${timestamp}] ${message}`;
+    logger.log("error", logEntry)
 
     ctx.response.status = 500;
     ctx.response.body = { error: "Internal Server Error", info: error.message };

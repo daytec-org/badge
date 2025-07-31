@@ -1,5 +1,4 @@
 import { type Context } from 'jsr:@oak/oak/'
-import { requestLog } from '~/src/utils/log.ts'
 
 class ClientIcons {
   private _icons: Record<string, string> = {}
@@ -26,7 +25,6 @@ const getIcon = new ClientIcons().get
 
 export async function handleImage({ request, response }: Context) {
   const img = request.url.pathname.split('/').pop()
-  requestLog(`Image ${img}`, request)
 
   if (img) {
     response.type = 'image/svg+xml; charset=utf-8'

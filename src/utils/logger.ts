@@ -1,7 +1,11 @@
-import { joinPaths, fileExists } from './fs.ts';
+import { joinPaths, fileExists, readTextFile } from './fs.ts';
 
+type TLoggerType = 'file' | 'memory'
+
+const LOG_TYPE = (Deno.env.get("LOG_TYPE") || 'memory') as TLoggerType
 const FILE_SIZE = parseInt(Deno.env.get("LOG_FILE_SIZE") || "1024", 10);
 const LOG_LEVEL = Deno.env.get("LOG_LEVEL") || "info";
+const MAX_LOG_COUNT = 1024
 
 export const logLevels = ["error", "warn", "info", "http", "debug", "trace"];
 export type TLogLevel = "error" | "warn" | "info" | "http" | "debug" | "trace";
@@ -76,6 +80,61 @@ export class FileLogger {
     const logPath = joinPaths(Deno.cwd(), "logs", `${level}.log`);
     await this.logRotation.handleRotation(logPath);
 
-    await Deno.writeTextFile(logPath, message, { append: true }).catch(() => { });
+    await Deno.writeTextFile(logPath, `${message}\n`, { append: true }).catch(() => { });
+  }
+
+  public async get(level: string) {
+    const logPath = joinPaths(Deno.cwd(), "logs", `${level}.log`);
+
+    if (!await fileExists(logPath)) {
+      return "Log file not found"
+    }
+
+    return readTextFile(logPath);
   }
 }
+
+class MemoryLogger {
+  private logs: Partial<Record<TLogLevel, string[]>> = {}
+
+  public log(level: TLogLevel, message: string) {
+    if (!this.logs[level]) {
+      this.logs[level] = [message]
+    } else {
+      this.logs[level].push(message)
+      if (this.logs[level].length > MAX_LOG_COUNT) {
+        this.logs[level].splice(0, 1)
+      }
+    }
+  }
+
+  public get(level: TLogLevel) {
+    if (this.logs[level]) {
+      return this.logs[level].join('\n')
+    }
+
+    return 'No logs'
+  }
+}
+
+class Logger {
+  private logger: FileLogger | MemoryLogger
+
+  constructor(type: TLoggerType) {
+    this.logger = type === 'file' ? new FileLogger() : new MemoryLogger()
+  }
+
+  public log(level: TLogLevel, message: string) {
+    this.logger.log(level, message)
+  }
+
+  public get(level: string) {
+    if (!logLevels.includes(level)) {
+      return "Invalid log level"
+    }
+
+    return this.logger.get(level as TLogLevel)
+  }
+}
+
+export const logger = new Logger(LOG_TYPE)
