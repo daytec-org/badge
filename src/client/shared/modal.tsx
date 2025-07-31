@@ -36,7 +36,7 @@ export const Modal: ModalComponent = (() => {
       <div className={state.visible ? 'modal__outer' : 'modal__outer_hidden'} onClick={handleClick}>
         <div className="modal__inner">
           <div className="modal__close" onClick={closeModal}>
-            <img src={`${API_URL}/img/cross`} alt="close" />
+            <img src={`${API_URL}/img/cross.svg`} alt="close" />
           </div>
           {!state.reset && state.children}
         </div>
