@@ -1,8 +1,8 @@
 {
-  "version": "0.0.2",
+  "version": "0.0.3",
   "tasks": {
-    "dev": "DEV_MODE=true deno run --allow-env --env-file=.env --allow-net --allow-read --watch main.ts",
-    "start": "deno run --allow-env --env-file=.env --allow-net --allow-read main.ts"
+    "dev": "DEV_MODE=true deno run --allow-env --env-file=.env --allow-net --allow-read --allow-write --watch main.ts",
+    "start": "deno run --allow-env --env-file=.env --allow-net --allow-read --allow-write main.ts"
   },
   "compilerOptions": {
     "jsx": "react-jsx",
