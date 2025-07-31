@@ -22,6 +22,6 @@ router.get('/error', () => { throw Error('Example exception') })
 router.get('/', handleMainPage)
 router.get('/favicon.ico', handleFavicon)
 router.get('/:file', handleSource)
-
 router.get('/img/:file', handleImage)
+
 export default router
