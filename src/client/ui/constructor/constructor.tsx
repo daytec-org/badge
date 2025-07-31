@@ -1,10 +1,15 @@
 import React from 'https://esm.sh/react@18.2.0'
-import { Message } from '../message/message.tsx'
-import { Select } from '../select/select.tsx'
+
+import { Message } from '../../shared/message.tsx'
+import { Select, OptionItem } from '../../shared/select.tsx'
+import { Input } from '../../shared/input.tsx'
+import { Toggle } from '../../shared/toggle.tsx'
+import { ButtonSubmit, ButtonSecondary } from '../../shared/button.tsx'
 import { ENV } from '@/config'
 
 const { API_URL } = ENV
 const BADGE_TYPE = ['plain', 'skill', 'stack']
+const badgeOptions = BADGE_TYPE.map((label, id) => ({ id, label }))
 
 interface BadgeProps {
   title: string
@@ -14,46 +19,30 @@ interface BadgeProps {
 }
 
 export const Constructor = () => {
-  const [iconOptions, setIconOptions] = React.useState<string[]>([])
+  const [iconOptions, setIconOptions] = React.useState<OptionItem[]>([])
   const [badgeType, setBadgeType] = React.useState('plain')
   const [fields, setFields] = React.useState<BadgeProps>({ title: '', color: '', icon: '', value: '' })
-  const [stackItems, setStackItems] = React.useState([
-    {
-      title: '',
-      icon: '',
-      value: '',
-    },
-  ])
-  const [showIconDropdown, setShowIconDropdown] = React.useState(false)
-  const [stackIconDropdown, setStackIconDropdown] = React.useState([false])
-  const [filteredIcons, setFilteredIcons] = React.useState(iconOptions)
   const [resultUrl, setResultUrl] = React.useState('')
   const [showCopied, setShowCopied] = React.useState(false)
+  const [stackItems, setStackItems] = React.useState([{ title: '', icon: '', value: '' }])
 
   React.useEffect(() => {
-    const fetchIcons = async () => {
-      const icons = await fetch(`${API_URL}/icons`)
-        .then(res => res.json())
-        .catch(error => Message.show(error.message, 'error'))
-      setIconOptions(icons)
-      setFilteredIcons(icons)
-    }
-    fetchIcons()
+    fetch(`${API_URL}/icons`)
+      .then(res => res.json())
+      .then(icons => {
+        setIconOptions((icons as string[]).map((label, id) => ({ id, label })))
+      })
+      .catch(error => Message.show(error.message, 'error'))
   }, [])
 
-  const handleTypeChange = (value: string) => {
-    setBadgeType(value)
-    setShowIconDropdown(false)
-    setStackIconDropdown(prev => prev.map(() => false))
+  const handleTypeChange = (id?: number) => {
+    const value = id ? BADGE_TYPE[id] : undefined
+    if (value) {
+      setBadgeType(value)
+    }
   }
 
   const handleInput = (type: string, key: string, value: string, index?: number) => {
-    if (key === 'icon') {
-      setShowIconDropdown(true)
-      const filtered = iconOptions.filter(icon => icon.toLowerCase().includes(value.toLowerCase()))
-      setFilteredIcons(filtered)
-    }
-
     if (type === 'plain' || type === 'skill') {
       setFields(prev => ({ ...prev, [key]: value }))
     } else if (type === 'stack' && index !== undefined) {
@@ -63,29 +52,17 @@ export const Constructor = () => {
     }
   }
 
-  const toggleDropdown = (type: string, index?: number) => {
-    if (type === 'stack' && index !== undefined) {
-      const updatedItems = [...stackIconDropdown]
-      updatedItems[index] = !updatedItems[index]
-      setStackIconDropdown(updatedItems)
-    }
-    setShowIconDropdown(!showIconDropdown)
-  }
-
   const selectIcon = (type: string, icon: string, index?: number) => {
     if (type === 'plain' || type === 'skill') {
       setFields(prev => ({ ...prev, icon }))
-      setShowIconDropdown(false)
     } else if (type === 'stack' && index !== undefined) {
       const updatedItems = [...stackItems]
       updatedItems[index].icon = icon
       setStackItems(updatedItems)
-      setStackIconDropdown(prev => prev.map((el, i) => (i === index ? false : el)))
     }
   }
 
-  const handleCreateBadge = (e: React.FormEvent) => {
-    e.preventDefault()
+  const handleCreateBadge = () => {
     if (badgeType === 'plain' || badgeType === 'skill') {
       setResultUrl(
         `/${badgeType}?${new URLSearchParams({
@@ -108,41 +85,17 @@ export const Constructor = () => {
       <div className="home__fields">
         {Object.entries(fields).map(([key, value]) => {
           if (key === 'icon') {
-            const isShown = badgeType === 'stack' ? stackIconDropdown[index] : showIconDropdown
-
-            return (
-              <div key={key} className="home__icon_container">
-                <input
-                  className="home__input"
-                  type="text"
-                  name="icon"
-                  placeholder="icon"
-                  value={fields.icon}
-                  onChange={e => handleInput(badgeType, key, e.target.value, index)}
-                  onFocus={() => toggleDropdown(badgeType, index)}
-                />
-                {isShown && (
-                  <div className="home__icon_dropdown">
-                    {filteredIcons.map(icon => (
-                      <div key={icon} className="home__icon_option" onClick={() => selectIcon(badgeType, icon, index)}>
-                        {icon}
-                      </div>
-                    ))}
-                  </div>
-                )}
-              </div>
-            )
+            return <Select key={key} options={iconOptions} name="icon" placeholder="icon" searchEnable onClick={(_, value) => selectIcon(badgeType, value, index)} />
           }
 
           return (
-            <input
+            <Input
               key={key}
-              className="home__input"
               type="text"
               name={key}
               placeholder={key}
               value={value}
-              onChange={e => handleInput(badgeType, key, e.target.value, index)}
+              onChange={value => handleInput(badgeType, key, value, index)}
             />
           )
         })}
@@ -155,16 +108,12 @@ export const Constructor = () => {
       <>
         {stackItems.map((item, index) => createFields(item, index))}
         <div className="home__stack_btns_container">
-          <button
-            className="home__stack_btn"
-            type="button"
-            onClick={() => setStackItems([...stackItems, { title: '', icon: '', value: '' }])}
-          >
+          <ButtonSecondary onClick={() => setStackItems([...stackItems, { title: '', icon: '', value: '' }])}>
             Add
-          </button>
-          <button className="home__stack_btn" type="button" onClick={() => setStackItems(stackItems.slice(0, -1))}>
+          </ButtonSecondary>
+          <ButtonSecondary onClick={() => setStackItems(stackItems.slice(0, -1))}>
             Remove
-          </button>
+          </ButtonSecondary>
         </div>
       </>
     )
@@ -172,12 +121,12 @@ export const Constructor = () => {
 
   const constructorForm = (type: string) => {
     return (
-      <form className="home__form">
+      <form className="home__form" onSubmit={e => e.preventDefault()}>
         {(type === 'plain' || type === 'skill') && createFields(fields)}
         {type === 'stack' && createStackFields()}
-        <button className="home__submit_btn" type="submit" onClick={e => handleCreateBadge(e)}>
+        <ButtonSubmit onClick={handleCreateBadge}>
           Create
-        </button>
+        </ButtonSubmit>
       </form>
     )
   }
@@ -196,15 +145,11 @@ export const Constructor = () => {
   return (
     <div className="home__constructor">
       <h3 className="home__title">Constructor</h3>
-      <div className="home__select_container">
-        <Select
-          options={BADGE_TYPE}
-          name="select"
-          placeholder="Select type of badge"
-          defaultValue="plain"
-          onChange={value => handleTypeChange(value)}
-        />
-      </div>
+      <Toggle
+        options={badgeOptions}
+        defChecked={0}
+        onChange={handleTypeChange}
+      />
       {constructorForm(badgeType)}
       <div>
         <p>Result:</p>
@@ -213,9 +158,9 @@ export const Constructor = () => {
             <code style={{ overflow: 'hidden', textOverflow: 'ellipsis' }}>{resultUrl}</code>
             <div className="home__copy">
               {showCopied ? (
-                <img className="home__copy_notification" src={`${API_URL}/img/success`} alt="Success Icon" />
+                <img className="home__copy_notification" src={`${API_URL}/img/success.svg`} alt="Success Icon" />
               ) : (
-                <img src={`${API_URL}/img/copy`} alt="Copy Icon" />
+                <img src={`${API_URL}/img/copy.svg`} alt="Copy Icon" />
               )}
             </div>
           </div>

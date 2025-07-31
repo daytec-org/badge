@@ -19,6 +19,6 @@ router.get('/icons', handleIconList)
 router.get('/', handleMainPage)
 router.get('/favicon.ico', handleFavicon)
 router.get('/:file', handleSource)
-
 router.get('/img/:file', handleImage)
+
 export default router
