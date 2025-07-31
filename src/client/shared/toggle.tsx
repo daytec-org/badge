@@ -8,7 +8,7 @@ interface ToggleProps {
   onChange?: (id: number | undefined) => void
 }
 
-const EXPERIMENTAL = true
+const EXPERIMENTAL = false
 let counter = 1
 
 export const Toggle = ({ name = `toggle${counter}`, options, defChecked, reset, onChange }: ToggleProps) => {

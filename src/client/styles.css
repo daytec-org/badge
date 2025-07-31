@@ -802,16 +802,6 @@ textarea {
   transition: 0.3s ease all;
 }
 
-@media (max-width: 768px) {
-  .select {
-    font-size: 1.4rem;
-  }
-
-  .select__placeholder {
-    top: 0.8rem;
-  }
-}
-
 .select__placeholder_shift,
 .select__search:focus ~ .select__placeholder {
   top: 0;
@@ -895,15 +885,5 @@ textarea {
 
   .select__multiple_item_delete:hover {
     opacity: 1;
-  }
-}
-
-@media (max-width: 390px) {
-  .select__field {
-    margin-right: 2rem;
-  }
-
-  .select__caret {
-    width: 2rem;
   }
 }

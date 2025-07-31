@@ -36,7 +36,7 @@ export const Constructor = () => {
   }, [])
 
   const handleTypeChange = (id?: number) => {
-    const value = id ? BADGE_TYPE[id] : undefined
+    const value = id !== undefined ? BADGE_TYPE[id] : undefined
     if (value) {
       setBadgeType(value)
     }
