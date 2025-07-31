@@ -4,6 +4,8 @@ import { Select } from '../select/select.tsx'
 import { ENV } from '@/config'
 
 const { API_URL } = ENV
+const BADGE_TYPE = ['plain', 'skill', 'stack']
+
 interface BadgeProps {
   title: string
   color?: string
@@ -12,7 +14,6 @@ interface BadgeProps {
 }
 
 export const Constructor = () => {
-  const BADGE_TYPE = ['plain', 'skill', 'stack']
   const [iconOptions, setIconOptions] = React.useState<string[]>([])
   const [badgeType, setBadgeType] = React.useState('plain')
   const [fields, setFields] = React.useState<BadgeProps>({ title: '', color: '', icon: '', value: '' })
