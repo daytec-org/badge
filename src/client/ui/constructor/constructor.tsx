@@ -1,5 +1,10 @@
 import React from 'https://esm.sh/react@18.2.0'
-import { API_URL } from '../../../const.ts'
+import { Message } from '../message/message.tsx'
+import { Select } from '../select/select.tsx'
+import { ENV } from '@/config'
+
+const { API_URL } = ENV
+const BADGE_TYPE = ['plain', 'skill', 'stack']
 
 interface BadgeProps {
   title: string
@@ -29,15 +34,15 @@ export const Constructor = () => {
     const fetchIcons = async () => {
       const icons = await fetch(`${API_URL}/icons`)
         .then(res => res.json())
-        .catch(console.error)
+        .catch(error => Message.show(error.message, 'error'))
       setIconOptions(icons)
       setFilteredIcons(icons)
     }
     fetchIcons()
   }, [])
 
-  const handleTypeChange = (event: React.ChangeEvent<HTMLSelectElement>) => {
-    setBadgeType(event.target.value)
+  const handleTypeChange = (value: string) => {
+    setBadgeType(value)
     setShowIconDropdown(false)
     setStackIconDropdown(prev => prev.map(() => false))
   }
@@ -183,23 +188,23 @@ export const Constructor = () => {
       .then(() => {
         setShowCopied(true)
         setTimeout(() => setShowCopied(false), 1000)
+        Message.show('Copied to clipboard', 'regular')
       })
-      .catch(err => {
-        console.error('Failed to copy: ', err)
-      })
+      .catch(error => Message.show(<div>Failed to copy: {error.message}</div>, 'error'))
   }
 
   return (
-    <div className="home__info">
+    <div className="home__constructor">
       <h3 className="home__title">Constructor</h3>
-      <label>
-        Select type of badge:
-        <select className="home__select" value={badgeType} onChange={handleTypeChange}>
-          <option value="plain">plain</option>
-          <option value="skill">skill</option>
-          <option value="stack">stack</option>
-        </select>
-      </label>
+      <div className="home__select_container">
+        <Select
+          options={BADGE_TYPE}
+          name="select"
+          placeholder="Select type of badge"
+          defaultValue="plain"
+          onChange={value => handleTypeChange(value)}
+        />
+      </div>
       {constructorForm(badgeType)}
       <div>
         <p>Result:</p>

@@ -1,16 +1,18 @@
 import React from 'https://esm.sh/react@18.2.0'
 import { Constructor } from '../constructor/constructor.tsx'
-import { API_URL } from '../../../const.ts'
+import { ENV } from '@/config'
+
+const { API_URL } = ENV
 
 export const Home = () => {
   return (
     <main className="home__main">
-      <div className="home__info">
+      <div className="home__welcome">
         <h1>Badge service</h1>
         <p>A pet project that provide ability to get variety of svg badges.</p>
       </div>
       <Constructor />
-      <div>
+      <div className="home__examples">
         <h3 className="home__title">Examples</h3>
         <ul className="list__badges">
           <li className="home__badge_item">

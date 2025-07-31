@@ -81,9 +81,11 @@ body {
 
 #root {
   width: 100%;
+  height: 100vh;
   display: flex;
   flex-direction: column;
   align-items: center;
+  justify-content: space-between;
 }
 
 main {
@@ -191,11 +193,41 @@ a:hover {
   display: none;
 }
 
-.home__info {
+.home__main {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+
+.home__welcome,
+.home__constructor,
+.home__examples {
   box-sizing: border-box;
-  width: 100%;
   padding: 0.5rem;
   text-align: center;
+}
+
+@media (min-width: 840px) {
+  .home__main {
+    align-items: start;
+  }
+
+  .home__welcome,
+  .home__examples {
+    width: calc(100% - 25rem);
+  }
+
+  .home__constructor {
+    width: 25rem;
+    height: 100vh;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    position: absolute;
+    border-left: 1px solid var(--color20);
+    top: 0%;
+    right: 0%;
+  }
 }
 
 .list__badges {
@@ -221,15 +253,9 @@ a:hover {
   text-align: center;
 }
 
-.home__select {
-  width: 8rem;
-  margin: 0.5rem;
-  padding: 0.5rem;
-  color: var(--color100);
-  background-color: var(--color00);
-  border: 1px solid var(--color100);
-  border-radius: 8px;
-  font-size: 1rem;
+.home__select_container {
+  width: 12rem;
+  margin: 0 auto;
 }
 
 .home__form {
@@ -365,4 +391,179 @@ a:hover {
     opacity: 0;
     top: -1rem;
   }
+}
+
+/*Modal*/
+
+.modal__outer {
+  position: fixed;
+  z-index: 900;
+  top: 0;
+  left: 0;
+  display: flex;
+  width: 100dvw;
+  height: 100dvh;
+  align-items: center;
+  justify-content: center;
+  background-color: rgb(0 0 0 / 50%);
+}
+
+.modal__outer_hidden {
+  display: none;
+}
+
+.modal__inner {
+  position: relative;
+  display: flex;
+  min-width: 22rem;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  padding: 1rem 1rem 1.5rem;
+  border-radius: 0.75rem;
+  margin: 0 1rem;
+  background-color: var(--color10);
+  font-size: 1rem;
+}
+
+.modal__close {
+  position: sticky;
+  z-index: 2;
+  top: 0;
+  display: flex;
+  width: 2rem;
+  height: 2rem;
+  flex-shrink: 0;
+  align-items: center;
+  justify-content: center;
+  margin-left: auto;
+  background-color: inherit;
+  cursor: pointer;
+  transition: opacity 0.25s linear;
+
+  &:hover {
+    opacity: 0.6;
+  }
+}
+.modal__close img {
+  width: 1.5rem;
+  height: 1.5rem;
+  filter: invert(var(--color-scheme));
+}
+
+@media (max-width: 430px) {
+  .modal__inner {
+    width: 100%;
+    height: 100%;
+    border-radius: unset;
+    margin: 0;
+    overflow-y: auto;
+  }
+}
+
+/*Message*/
+
+.messages {
+  position: fixed;
+  z-index: 1000;
+  top: 3.5rem;
+  right: 0;
+  bottom: 3.5rem;
+  left: 0;
+  display: flex;
+  flex-direction: column-reverse;
+  align-items: flex-end;
+  row-gap: 4px;
+  overflow: hidden;
+  pointer-events: none;
+}
+
+.messages__item {
+  position: relative;
+  min-width: 10rem;
+  max-width: 400px;
+  padding: 1rem;
+  background-color: var(--color20);
+  box-shadow: 1px 1px 4px 0 #0008;
+  line-height: 1.2;
+  display: flex;
+  column-gap: 0.5rem;
+  animation: fadein 0.5s forwards;
+}
+.messages__item.hidden {
+  animation: fadeout 0.5s forwards;
+}
+
+.messages__item_icon {
+  display: flex;
+  width: 20px;
+  height: 20px;
+  flex-shrink: 0;
+  align-items: center;
+  justify-content: center;
+  border-radius: 50%;
+  color: #fff;
+  background-color: green;
+  font-size: 12px;
+}
+
+@keyframes fadein {
+  from {
+    opacity: 0;
+    transform: translateX(100%);
+  }
+
+  to {
+    opacity: 1;
+    transform: translateX(0);
+  }
+}
+
+@keyframes fadeout {
+  to {
+    opacity: 0;
+    transform: translateX(100%);
+  }
+}
+
+/*Select*/
+
+.select {
+  flex: 0 1 40%;
+  position: relative;
+  min-width: 12rem;
+  box-sizing: border-box;
+  padding: 0 0.6rem;
+  border: 2px solid var(--color50);
+  background-color: var(--color10);
+  color: var(--color100);
+  font-size: 1rem;
+  transition: background-color 0.25s linear, border-color 0.25s linear;
+
+  &:hover {
+    border-color: var(--color60);
+    background-color: var(--color20);
+  }
+}
+
+.select__element {
+  width: 100%;
+  padding: 1rem 0 0.6rem;
+  border: none;
+  background-color: inherit;
+  color: inherit;
+  font-size: 1rem;
+  line-height: 1.5;
+  -webkit-text-fill-color: var(--color100);
+}
+
+.select__placeholder {
+  position: absolute;
+  top: 0;
+  left: 0.6rem;
+  color: inherit;
+  opacity: 0.7;
+  font-size: 0.8em;
+  pointer-events: none;
+  transition: 0.3s ease all;
 }
