@@ -14,7 +14,7 @@ class Source {
         const [name, ext] = filename.split('.')
         const path = scr.includes(ext) ? './src/client' : './public'
 
-        if (ext === 'js') {
+        if (DEV_MODE && ext === 'js') {
           return bundle(`${path}/${name}.ts`, {
             importMap: DEV_MODE ? './import-map.dev.json' : './import-map.prod.json',
           })

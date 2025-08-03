@@ -31,7 +31,9 @@ export const Message: MessageComponent = (() => {
                 {'\u274C'}
               </div>
             ) : (
-              <div className="messages__item_icon">{'\u2714'}</div>
+              <div className="messages__item_icon">
+                {'\u2714'}
+              </div>
             )}
             {children}
           </div>
