@@ -171,7 +171,19 @@ export const Constructor = () => {
                 />
               )}
             />
-
+            <Controller
+              name={`stackItems.${i}.color`}
+              control={control}
+              render={({ field }) => (
+                <Input
+                  name={`stackItems.${i}.color`}
+                  type="text"
+                  placeholder="color"
+                  value={field.value}
+                  onChange={value => field.onChange(value)}
+                />
+              )}
+            />
             <Controller
               name={`stackItems.${i}.icon`}
               control={control}

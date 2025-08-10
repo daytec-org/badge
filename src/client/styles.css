@@ -222,14 +222,23 @@ a:hover {
 
   .home__constructor {
     width: 25rem;
-    height: 100vh;
+    height: calc(100vh - 9rem);
     display: flex;
     flex-direction: column;
-    justify-content: center;
     position: absolute;
-    border-left: 1px solid var(--color20);
-    top: 0%;
-    right: 0%;
+    top: 5rem;
+    right: 0;
+    overflow-y: auto;
+  }
+
+  .home__examples::after {
+    content: '';
+    position: absolute;
+    top: 0;
+    right: 25rem;
+    width: 1px;
+    height: 100vh;
+    background-color: var(--color20);
   }
 }
 
