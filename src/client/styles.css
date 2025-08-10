@@ -179,6 +179,7 @@ a:hover {
   align-items: center;
   cursor: pointer;
   transition: all 0.2s ease-in-out;
+  z-index: 100;
 
   &:hover {
     opacity: 0.5;
@@ -203,6 +204,7 @@ a:hover {
 .home__welcome,
 .home__constructor,
 .home__examples {
+  width: 100%;
   box-sizing: border-box;
   padding: 0.5rem;
   text-align: center;
@@ -258,47 +260,54 @@ a:hover {
   padding: 1rem 0;
   display: flex;
   flex-direction: column;
-  align-items: center;
-  gap: 0.5rem;
-}
-
-.home__fields {
-  display: flex;
   gap: 0.5rem;
   flex-wrap: wrap;
 
   & > div {
-    flex: 1 0 8rem;
+    flex: 1 0 3rem;
+  }
+
+  & > .primary {
+    width: 100%;
+  }
+
+  & > .home__stack_btns_container {
+    flex: 1 0 1rem;
+    display: flex;
+    gap: 0.5rem;
   }
 }
 
-.home__stack_btns_container {
+.home__fields {
   display: flex;
+  flex-direction: column;
   gap: 0.5rem;
+  flex-wrap: wrap;
+
+  & > div {
+    flex: 1 0 3rem;
+  }
 }
 
-.home__result_url {
-  height: 2rem;
-  display: flex;
-  justify-content: center;
-  align-items: center;
-  gap: 1rem;
+.copy__container {
+  & > div {
+    box-sizing: border-box;
+    padding-right: 1.4rem;
+    text-align: start;
+    word-break: break-all;
+  }
 }
 
-.home__copy {
-  position: relative;
+.copy {
+  position: absolute;
   width: 1rem;
   height: 1rem;
-  background: none;
-  border: none;
-  margin: 0;
-  padding: 0;
-  cursor: pointer;
-  filter: invert(var(--color-scheme));
+  right: 0.5rem;
+  top: calc(50% - 0.5rem);
 }
 
-.home__copy_notification {
-  animation: fadeInOut 1s;
+.copy__icon {
+  filter: invert(var(--color-scheme));
 }
 
 @keyframes fadeInOut {
@@ -318,6 +327,10 @@ a:hover {
     opacity: 0;
     top: -1rem;
   }
+}
+
+.home__result_img {
+  margin: 1rem auto;
 }
 
 /* Button */
