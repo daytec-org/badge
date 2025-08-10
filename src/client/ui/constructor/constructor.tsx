@@ -257,7 +257,7 @@ export const Constructor = () => {
       case 'Markdown':
         return `![${badgeType} badge](${resultUrl})`
       case 'rSt':
-        return `.. image:: ${resultUrl}/n:alt: ${badgeType} badge`
+        return `.. image:: ${resultUrl}\n   :alt: ${badgeType} badge`
       case 'AsciiDoc':
         return `image::${resultUrl}[${badgeType} badge]`
       case 'HTML':

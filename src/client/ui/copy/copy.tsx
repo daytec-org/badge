@@ -20,13 +20,15 @@ export const Copy = ({ text }: { text: string }) => {
   }
 
   return (
-    <div className="copy__container  input_container" onClick={() => handleCopy(text)}>
+    <div className="copy__container  input_container">
       <div className="input">{text}</div>
-      {showCopied ? (
-        <img className="copy" src={`${API_URL}/img/success.svg`} alt="Success Icon" />
-      ) : (
-        <img className="copy copy__icon" src={`${API_URL}/img/copy.svg`} alt="Copy Icon" />
-      )}
+      <div className="copy" onClick={() => handleCopy(text)}>
+        {showCopied ? (
+          <img src={`${API_URL}/img/success.svg`} alt="Success Icon" />
+        ) : (
+          <img className="copy__icon" src={`${API_URL}/img/copy.svg`} alt="Copy Icon" />
+        )}
+      </div>
     </div>
   )
 }

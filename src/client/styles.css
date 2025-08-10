@@ -290,7 +290,7 @@ a:hover {
 }
 
 .copy__container {
-  & > div {
+  & > .input {
     box-sizing: border-box;
     padding-right: 1.4rem;
     text-align: start;
