@@ -222,13 +222,17 @@ a:hover {
 
   .home__constructor {
     width: 25rem;
-    height: calc(100vh - 9rem);
+    height: calc(100vh - 7rem);
     display: flex;
     flex-direction: column;
     position: absolute;
     top: 5rem;
     right: 0;
     overflow-y: auto;
+
+    & > .toggle {
+      overflow: visible;
+    }
   }
 
   .home__examples::after {

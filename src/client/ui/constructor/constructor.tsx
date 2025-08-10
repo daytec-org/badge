@@ -251,6 +251,7 @@ export const Constructor = () => {
             Object.fromEntries(
               Object.entries({
                 title: item.title,
+                color: item.color,
                 icon: item.icon,
                 value: item.value,
               }).filter(([_, value]) => value != null && value !== ''),
@@ -281,21 +282,6 @@ export const Constructor = () => {
 
   const handleShow = () => {
     setIsShowBadge(true)
-  }
-
-  const constructorForm = (type: string) => {
-    return (
-      <form className="home__form" onSubmit={handleSubmit(handleShow)}>
-        {(type === 'plain' || type === 'skill') && createFields()}
-        {type === 'stack' && createStackFields()}
-        <div>
-          <Toggle options={resultOptions} defChecked={0} onChange={handleResultChange} />
-          <Controller name="result" control={control} render={({ field }) => <Copy text={field.value} />} />
-        </div>
-        <ButtonSubmit>Show</ButtonSubmit>
-        {isShowBadge && <img className="home__result_img" src={`${resultUrl}`} />}
-      </form>
-    )
   }
 
   return (
