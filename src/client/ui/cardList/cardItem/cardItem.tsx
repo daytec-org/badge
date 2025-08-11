@@ -12,9 +12,9 @@ type CardItemProp = {
 export const CardItem = ({ id, title, link }: CardItemProp) => {
   return (
     <li className="card__item" key={id}>
-      <h3>{title} badges</h3>
+      <h3>{title} badge</h3>
       <div className="card__item_preview">
-        <img src={`${API_URL}${link}`} />
+        <img src={`${API_URL}${link}`} className={title === 'Stack' ? 'stack' : ''} />
       </div>
       <code className="card__item_code">{link}</code>
     </li>

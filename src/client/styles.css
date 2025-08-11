@@ -6,6 +6,10 @@
   -moz-osx-font-smoothing: grayscale;
   color-scheme: light dark;
   --min-card-width: 13.75rem;
+  --border-radius-outer: 0.625rem;
+  --border-radius-inner: 0.375rem;
+  --border-thickness: 1px;
+  --card-shadow: 240, 240, 240;
 
   --color-scheme: 0;
   --color00: #040608;
@@ -47,6 +51,7 @@
 
     --link-color: #386989;
     --link-color-hover: #4c9ce2;
+    --card-shadow: 10, 10, 10;
   }
 }
 
@@ -666,7 +671,7 @@ textarea {
   position: relative;
   width: 100%;
   border: 1px solid var(--color50);
-  border-radius: var(--border-radius);
+  border-radius: var(--border-radius-outer);
   background-color: var(--color00);
   cursor: pointer;
   font-size: 1rem;
@@ -697,7 +702,7 @@ textarea {
   display: flex;
   align-items: center;
   padding: 0 0.5rem;
-  border-radius: var(--border-radius);
+  border-radius: var(--border-radius-outer);
   background-color: var(--color20);
   column-gap: 0.2rem;
   cursor: default;
@@ -882,23 +887,23 @@ textarea {
   flex-direction: column;
   gap: 0.75rem;
   background: var(--color20);
-  border-radius: 0.625rem;
+  border-radius: var(--border-radius-outer);
   padding: 0.75rem;
-  box-shadow: 0 0.125rem 0.5rem rgba(10, 10, 10, 0.06);
-  border: 0.0625rem solid rgba(0, 0, 0, 0.04);
+  box-shadow: 0 0.125rem 0.5rem rgba(var(--card-shadow), 0.06);
+  border: var(--border-thickness) solid rgba(0, 0, 0, 0.04);
   box-sizing: border-box;
 }
 
 .card__item > h3 {
   margin: 0;
-  font-size: 0.875rem;
+  font-size: smaller;
   font-weight: 600;
 }
 
 .card__item_preview {
   width: 100%;
   height: 17.5rem;
-  border-radius: 0.375rem;
+  border-radius: var(--border-radius-inner);
   overflow: hidden;
   background: var(--color30);
   display: flex;
@@ -908,8 +913,11 @@ textarea {
 
 .card__item_preview img {
   display: block;
-  width: 100%;
   object-fit: cover;
+}
+
+.card__item_preview .stack {
+  width: 100%;
 }
 
 .card__item_code {
@@ -917,7 +925,7 @@ textarea {
   font-size: 0.75rem;
   background: var(--color30);
   padding: 0.375rem 0.5rem;
-  border-radius: 0.375rem;
+  border-radius: var(--border-radius-inner);
   overflow: hidden;
   text-overflow: ellipsis;
   white-space: nowrap;
@@ -925,7 +933,7 @@ textarea {
 
 .card__item:hover {
   transform: translateY(-0.25rem);
-  box-shadow: 0 0.5rem 1.25rem rgba(10, 10, 10, 0.08);
+  box-shadow: 0 0.5rem 1.25rem rgba(var(--card-shadow), 0.08);
 }
 
 @media (max-width: 32.5rem) {
