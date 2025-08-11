@@ -1,6 +1,6 @@
 import React from 'https://esm.sh/react@18.2.0'
 import { Constructor } from '../constructor/constructor.tsx'
-import { Examples } from '../examples/examples.tsx'
+import { CardList } from '../cardList/cardList.tsx'
 
 export const Home = () => {
   return (
@@ -10,7 +10,7 @@ export const Home = () => {
         <p>A pet project that provide ability to get variety of svg badges.</p>
       </div>
       <Constructor />
-      <Examples />
+      <CardList />
     </main>
   )
 }

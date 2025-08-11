@@ -3,20 +3,20 @@ import { ENV } from '@/config'
 
 const { API_URL } = ENV
 
-type BadgesCardProp = {
+type CardItemProp = {
   id: string
   title: string
   link: string
 }
 
-export const BadgesCard = ({ id, title, link }: BadgesCardProp) => {
+export const CardItem = ({ id, title, link }: CardItemProp) => {
   return (
-    <li className="home__badge_item" key={id}>
+    <li className="card__item" key={id}>
       <h3>{title} badges</h3>
-      <div className="preview">
+      <div className="card__item_preview">
         <img src={`${API_URL}${link}`} />
       </div>
-      <code className="home__code"> {link}</code>
+      <code className="card__item_code">{link}</code>
     </li>
   )
 }
