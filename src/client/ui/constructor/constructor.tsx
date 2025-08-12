@@ -12,8 +12,8 @@ import { Copy } from '../copy/copy.tsx'
 const { API_URL } = ENV
 const BADGE_TYPE = ['plain', 'skill', 'stack']
 const badgeOptions = BADGE_TYPE.map((label, id) => ({ id, label }))
-const resultType = ['URL', 'Markdown', 'rSt', 'AsciiDoc', 'HTML']
-const resultOptions = resultType.map((label, id) => ({ id, label }))
+const RESULT_TYPE = ['URL', 'Markdown', 'rSt', 'AsciiDoc', 'HTML']
+const resultOptions = RESULT_TYPE.map((label, id) => ({ id, label }))
 
 interface BadgeProps {
   title: string
@@ -61,7 +61,7 @@ export const Constructor = () => {
   const [iconOptions, setIconOptions] = React.useState<OptionItem[]>([])
   const [badgeType, setBadgeType] = React.useState('plain')
   const [resultUrl, setResultUrl] = React.useState('')
-  const [isShowBadge, setIsShowBadge] = React.useState(false)
+  const [showBadge, setShowBadge] = React.useState(false)
   const [resultView, setResultView] = React.useState('URL')
 
   React.useEffect(() => {
@@ -88,15 +88,15 @@ export const Constructor = () => {
   }
 
   const handleResultChange = (id?: number) => {
-    const value = id !== undefined ? resultType[id] : undefined
+    const value = id !== undefined ? RESULT_TYPE[id] : undefined
     if (value) {
       setResultView(value)
     }
   }
 
-  const createFields = () => {
+  const getFields = () => {
     return (
-      <div className="home__fields">
+      <div className="constructor__form_fields">
         <Controller
           name="title"
           control={control}
@@ -153,11 +153,16 @@ export const Constructor = () => {
     )
   }
 
-  const createStackFields = () => {
+  const getStackFields = () => {
     return (
       <>
         {fields.map((stackItem, i) => (
-          <div key={stackItem.id} className="home__fields">
+          <div key={stackItem.id} className="constructor__form_stack_fields">
+            {fields.length > 2 && (
+              <ButtonSecondary onClick={() => removeGroup(i)}>
+                <img src={`${API_URL}/img/cross.svg`} alt="delete" />
+              </ButtonSecondary>
+            )}
             <Controller
               name={`stackItems.${i}.title`}
               control={control}
@@ -212,13 +217,7 @@ export const Constructor = () => {
             />
           </div>
         ))}
-
-        <div className="home__stack_btns_container">
-          <ButtonSecondary onClick={removeGroup} disabled={fields.length <= 2}>
-            Remove
-          </ButtonSecondary>
-          <ButtonSecondary onClick={addGroup}>Add</ButtonSecondary>
-        </div>
+        <ButtonSecondary onClick={addGroup}>Add</ButtonSecondary>
       </>
     )
   }
@@ -227,8 +226,8 @@ export const Constructor = () => {
     append({ title: '', color: '', icon: '', value: '' })
   }
 
-  const removeGroup = () => {
-    remove(fields.length - 1)
+  const removeGroup = (i: number) => {
+    remove(i)
   }
 
   const createBadgeURL = (data: FormValues) => {
@@ -274,29 +273,33 @@ export const Constructor = () => {
       case 'AsciiDoc':
         return `image::${resultUrl}[${badgeType} badge]`
       case 'HTML':
-        return `<img alt="${badgeType} badge" src="${resultUrl}">`
+        return `<img alt="${badgeType} badge" src="${resultUrl}"/>`
       default:
         return resultUrl
     }
   }
 
   const handleShow = () => {
-    setIsShowBadge(true)
+    setShowBadge(!showBadge)
   }
 
   return (
-    <div className="home__constructor">
+    <div className="constructor">
       <h3 className="home__title">Constructor</h3>
       <Toggle options={badgeOptions} defChecked={0} onChange={handleTypeChange} />
-      <form className="home__form" onSubmit={handleSubmit(handleShow)}>
-        {(badgeType === 'plain' || badgeType === 'skill') && createFields()}
-        {badgeType === 'stack' && createStackFields()}
+      <form className="constructor__form" onSubmit={handleSubmit(handleShow)}>
+        {(badgeType === 'plain' || badgeType === 'skill') && getFields()}
+        {badgeType === 'stack' && getStackFields()}
         <div>
           <Toggle options={resultOptions} defChecked={0} onChange={handleResultChange} />
           <Controller name="result" control={control} render={({ field }) => <Copy text={field.value} />} />
         </div>
-        <ButtonSubmit>Show</ButtonSubmit>
-        {isShowBadge && <img className="home__result_img" src={`${resultUrl}`} />}
+        <ButtonSubmit>{showBadge ? 'Hide' : 'Show'}</ButtonSubmit>
+        {showBadge && (
+          <div className="constructor__result">
+            <img src={`${resultUrl}`} />
+          </div>
+        )}
       </form>
     </div>
   )
