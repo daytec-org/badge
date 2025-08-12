@@ -285,7 +285,7 @@ export const Constructor = () => {
 
   return (
     <div className="constructor">
-      <h3 className="home__title">Constructor</h3>
+      <h3 className="constructor__title ">Constructor</h3>
       <Toggle options={badgeOptions} defChecked={0} onChange={handleTypeChange} />
       <form className="constructor__form" onSubmit={handleSubmit(handleShow)}>
         {(badgeType === 'plain' || badgeType === 'skill') && getFields()}
