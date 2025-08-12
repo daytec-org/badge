@@ -219,7 +219,6 @@ a:hover {
 }
 
 /*Constructor*/
-
 .constructor {
   max-width: 100%;
 
@@ -292,6 +291,17 @@ a:hover {
   min-height: 0;
 }
 
+.constructor__result {
+  margin: 1rem auto;
+  width: 100%;
+  max-width: 100vw;
+  overflow-x: auto;
+  box-sizing: border-box;
+  position: relative;
+  display: inline-block;
+}
+
+/*Copy*/
 .copy__container {
   width: 100%;
   & > .input {
@@ -332,16 +342,6 @@ a:hover {
     opacity: 0;
     top: -1rem;
   }
-}
-
-.constructor__result {
-  margin: 1rem auto;
-  width: 100%;
-  max-width: 100vw;
-  overflow-x: auto;
-  box-sizing: border-box;
-  position: relative;
-  display: inline-block;
 }
 
 /* Button */
