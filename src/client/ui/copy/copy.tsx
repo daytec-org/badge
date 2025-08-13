@@ -13,20 +13,20 @@ export const Copy = ({ text }: { text: string }) => {
       .writeText(text)
       .then(() => {
         setShowCopied(true)
-        setTimeout(() => setShowCopied(false), 1000)
+        setTimeout(() => setShowCopied(false), 2000)
         Message.show('Copied to clipboard', 'regular')
       })
       .catch(error => Message.show(<div>Failed to copy: {error.message}</div>, 'error'))
   }
 
   return (
-    <div className="copy__container input_container">
-      <div className="input">{text}</div>
-      <div className="copy" onClick={() => handleCopy(text)}>
+    <div className="copy__container">
+      <div>{text}</div>
+      <div className="copy__btn" onClick={() => handleCopy(text)}>
         {showCopied ? (
           <img src={`${API_URL}/img/success.svg`} alt="copy" />
         ) : (
-          <img className="copy__icon" src={`${API_URL}/img/copy.svg`} alt="copy" />
+          <img className="themed_icon" src={`${API_URL}/img/copy.svg`} alt="copy" />
         )}
       </div>
     </div>

@@ -16,7 +16,7 @@ export const Theme = () => {
 
   return (
     <label className="header__theme">
-      <input type="checkbox" checked={theme === 'dark'} onChange={handleChange} />
+      <input id="color-scheme" type="checkbox" checked={theme === 'dark'} onChange={handleChange} />
       <img src={`${API_URL}/img/${theme}.svg`} alt="theme" />
     </label>
   )

@@ -1,11 +1,11 @@
 import React from 'https://esm.sh/react@18.2.0'
-import { Controller, useForm, useFieldArray } from 'https://esm.sh/react-hook-form@7.45.0?deps=react@18.2.0'
+import { Controller, useForm, useFieldArray, useWatch } from 'https://esm.sh/react-hook-form@7.45.0?deps=react@18.2.0'
 
 import { Message } from '../../shared/message.tsx'
 import { Select, OptionItem } from '../../shared/select.tsx'
 import { Input } from '../../shared/input.tsx'
 import { Toggle } from '../../shared/toggle.tsx'
-import { ButtonSubmit, ButtonSecondary } from '../../shared/button.tsx'
+import { ButtonSecondary } from '../../shared/button.tsx'
 import { ENV } from '@/config'
 import { Copy } from '../copy/copy.tsx'
 
@@ -32,14 +32,7 @@ interface FormValues {
 }
 
 export const Constructor = () => {
-  const {
-    control,
-    handleSubmit,
-    watch,
-    getValues,
-    setValue,
-    formState: { errors },
-  } = useForm({
+  const { control, getValues, setValue } = useForm({
     defaultValues: {
       title: '',
       color: '',
@@ -53,15 +46,12 @@ export const Constructor = () => {
     },
   })
 
-  const { fields, append, remove } = useFieldArray({
-    control,
-    name: 'stackItems',
-  })
-  const badgeValues = watch(['title', 'color', 'icon', 'value', 'stackItems'])
+  const { fields, append, remove } = useFieldArray({ control, name: 'stackItems' })
+  const watchedFields = useWatch({ control, name: ['title', 'color', 'icon', 'value', 'stackItems'] })
   const [iconOptions, setIconOptions] = React.useState<OptionItem[]>([])
   const [badgeType, setBadgeType] = React.useState('plain')
   const [resultUrl, setResultUrl] = React.useState('')
-  const [showBadge, setShowBadge] = React.useState(false)
+  const [showPreview, setShowPreview] = React.useState(false)
   const [resultView, setResultView] = React.useState('URL')
 
   React.useEffect(() => {
@@ -74,11 +64,14 @@ export const Constructor = () => {
   }, [])
 
   React.useEffect(() => {
-    const values = getValues()
-    createBadgeURL(values)
-    const result = createBadgeString()
-    setValue('result', result)
-  }, [badgeValues, resultView])
+    const badgeURL = createBadgeURL(getValues())
+    if (badgeURL) {
+      setResultUrl(badgeURL)
+      const result = createBadgeString(badgeURL)
+      setValue('result', result)
+      setShowPreview(false)
+    }
+  }, [watchedFields, badgeType, resultView])
 
   const handleTypeChange = (id?: number) => {
     const value = id !== undefined ? BADGE_TYPE[id] : undefined
@@ -159,9 +152,9 @@ export const Constructor = () => {
         {fields.map((stackItem, i) => (
           <div key={stackItem.id} className="constructor__form_stack_fields">
             {fields.length > 2 && (
-              <ButtonSecondary onClick={() => removeGroup(i)}>
+              <div className="constructor__form_stack_remove" onClick={() => removeGroup(i)}>
                 <img src={`${API_URL}/img/cross.svg`} alt="delete" />
-              </ButtonSecondary>
+              </div>
             )}
             <Controller
               name={`stackItems.${i}.title`}
@@ -217,7 +210,7 @@ export const Constructor = () => {
             />
           </div>
         ))}
-        <ButtonSecondary onClick={addGroup}>Add</ButtonSecondary>
+        <div className='constructor__form_stack_add' onClick={addGroup}>Add</div>
       </>
     )
   }
@@ -242,7 +235,7 @@ export const Constructor = () => {
           }).filter(([_, value]) => value != null && value !== ''),
         ),
       )
-      setResultUrl(`${API_URL}/${badgeType}?${params.toString()}`)
+      return `${API_URL}/${badgeType}?${params.toString()}`
     } else if (badgeType === 'stack') {
       const stackParams = data.stackItems
         .map((item: BadgeProps) =>
@@ -258,49 +251,45 @@ export const Constructor = () => {
           ).toString(),
         )
         .join(';')
-      setResultUrl(`${API_URL}/${badgeType}?${stackParams}`)
+      return `${API_URL}/${badgeType}?${stackParams}`
     }
   }
 
-  const createBadgeString = () => {
+  const createBadgeString = (badgeURL: string) => {
     switch (resultView) {
       case 'URL':
-        return resultUrl
+        return badgeURL
       case 'Markdown':
-        return `![${badgeType} badge](${resultUrl})`
+        return `![${badgeType} badge](${badgeURL})`
       case 'rSt':
-        return `.. image:: ${resultUrl}\n   :alt: ${badgeType} badge`
+        return `.. image:: ${badgeURL}\n   :alt: ${badgeType} badge`
       case 'AsciiDoc':
-        return `image::${resultUrl}[${badgeType} badge]`
+        return `image::${badgeURL}[${badgeType} badge]`
       case 'HTML':
-        return `<img alt="${badgeType} badge" src="${resultUrl}"/>`
+        return `<img alt="${badgeType} badge" src="${badgeURL}"/>`
       default:
-        return resultUrl
+        return badgeURL
     }
   }
 
-  const handleShow = () => {
-    setShowBadge(!showBadge)
-  }
+  const handleShowPreview = () => setShowPreview(cur => !cur)
 
   return (
     <div className="constructor">
       <h3 className="constructor__title ">Constructor</h3>
       <Toggle options={badgeOptions} defChecked={0} onChange={handleTypeChange} />
-      <form className="constructor__form" onSubmit={handleSubmit(handleShow)}>
+      <form className="constructor__form">
         {(badgeType === 'plain' || badgeType === 'skill') && getFields()}
         {badgeType === 'stack' && getStackFields()}
-        <div>
-          <Toggle options={resultOptions} defChecked={0} onChange={handleResultChange} />
-          <Controller name="result" control={control} render={({ field }) => <Copy text={field.value} />} />
-        </div>
-        <ButtonSubmit>{showBadge ? 'Hide' : 'Show'}</ButtonSubmit>
-        {showBadge && (
-          <div className="constructor__result">
-            <img src={`${resultUrl}`} />
-          </div>
-        )}
+        <Toggle options={resultOptions} defChecked={0} onChange={handleResultChange} />
+        <Controller name="result" control={control} render={({ field }) => <Copy text={field.value} />} />
       </form>
+      {!showPreview && <ButtonSecondary onClick={handleShowPreview}>Show preview</ButtonSecondary>}
+      {showPreview && (
+        <div className="constructor__result">
+          <img src={`${resultUrl}`} />
+        </div>
+      )}
     </div>
   )
 }
