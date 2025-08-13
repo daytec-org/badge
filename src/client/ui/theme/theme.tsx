@@ -1,4 +1,5 @@
 import React from 'https://esm.sh/react@18.2.0'
+
 import { ENV } from '@/config'
 
 const { API_URL } = ENV
@@ -15,7 +16,7 @@ export const Theme = () => {
 
   return (
     <label className="header__theme">
-      <input type="checkbox" checked={theme === 'dark'} onChange={handleChange} />
+      <input id="color-scheme" type="checkbox" checked={theme === 'dark'} onChange={handleChange} />
       <img src={`${API_URL}/img/${theme}.svg`} alt="theme" />
     </label>
   )

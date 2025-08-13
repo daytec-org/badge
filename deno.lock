@@ -153,11 +153,26 @@
     }
   },
   "redirects": {
+    "https://esm.sh/@types/react@~18.2.79/index.d.ts": "https://esm.sh/@types/react@18.2.79/index.d.ts",
+    "https://esm.sh/@types/react@~18.3.18/index.d.ts": "https://esm.sh/@types/react@18.3.23/index.d.ts",
+    "https://esm.sh/@types/react@~18.3.21/index.d.ts": "https://esm.sh/@types/react@18.3.23/index.d.ts",
+    "https://esm.sh/@types/react@~18.3.23/index.d.ts": "https://esm.sh/@types/react@18.3.23/index.d.ts",
     "https://esm.sh/@types/react@~19.0.12/jsx-runtime.d.ts": "https://esm.sh/@types/react@19.0.14/jsx-runtime.d.ts",
-    "https://esm.sh/react/jsx-runtime": "https://esm.sh/react@19.1.0/jsx-runtime"
+    "https://esm.sh/react/jsx-runtime": "https://esm.sh/react@19.1.0/jsx-runtime",
+    "https://esm.sh/react@^18.3.1?target=denonext": "https://esm.sh/react@18.3.1?target=denonext"
   },
   "remote": {
     "https://deno.land/x/jsx@v0.1.5/mod.ts": "24bb89837fda59c53c12a3c0e464378ca6de9b261dec1df57ba640b1cfed9611",
+    "https://esm.sh/react-hook-form@7.45.0": "cfdc2fb3b68989f5743c67b76aae36463b6a1c9563a0d21117caf6fb379b91f1",
+    "https://esm.sh/react-hook-form@7.45.0/X-ZHJlYWN0QDE4LjIuMA/denonext/react-hook-form.mjs": "a05825586ffa264c1110f25a8abe87a25f57390c30ff8e797c650d0efd4eb44d",
+    "https://esm.sh/react-hook-form@7.45.0/denonext/react-hook-form.mjs": "085734402bd59afdad3b195df6a46ac8cbff3d4e0c1bb1c0663fa0be67aa3253",
+    "https://esm.sh/react-hook-form@7.45.0?deps=react@18.2.0": "8733c03645a2286b451e93bedaf9d54bcd1a25d5784228a24f5ba77eb2817f0c",
+    "https://esm.sh/react-hook-form@7.48.2": "da9dc732e4ae480d8e710574f919daf047829bceea2af1460f41b5e42e29cbe0",
+    "https://esm.sh/react-hook-form@7.48.2/denonext/react-hook-form.mjs": "2e089781f0f7093ef2af03520da0cb81d5932a6064bfc07a95908e2ca5b22acb",
+    "https://esm.sh/react@18.2.0": "fed8aeb7d240bb42a2167c9c7c6e842e128c7630cbcb08c4d61c9c1926f89c75",
+    "https://esm.sh/react@18.2.0/denonext/react.mjs": "a986c2876dc2f73879f395e677dc34cb751f260e69db16364810655f884df173",
+    "https://esm.sh/react@18.3.1/denonext/react.mjs": "fec8d5ab4ffa55c8b563abc31060c3dc0205699aff20beec4aba0311efdcc1a0",
+    "https://esm.sh/react@18.3.1?target=denonext": "336090fd1f03fdb9530dce4ac761717b5e1e1a630c775bac184ec4ee0809cf89",
     "https://esm.sh/react@19.1.0/denonext/jsx-runtime.mjs": "fbd3137c02ae8733d3bfaf434884aada41253c9074bdd3baf598879de24fe70b",
     "https://esm.sh/react@19.1.0/jsx-runtime": "8c80348342f0448fbf5499e9f357ab3f678db3b7fbf782f8899fc88bb0a182c3"
   },
