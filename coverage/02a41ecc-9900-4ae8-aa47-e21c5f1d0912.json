@@ -1,0 +1,40 @@
+{
+  "scriptId": "342",
+  "url": "file:///E:/Projects/badge/src/utils/getIcon.ts",
+  "functions": [
+    {
+      "functionName": "",
+      "ranges": [{ "startOffset": 0, "endOffset": 442, "count": 1 }],
+      "isBlockCoverage": true
+    },
+    {
+      "functionName": "<instance_members_initializer>",
+      "ranges": [{ "startOffset": 16, "endOffset": 381, "count": 1 }],
+      "isBlockCoverage": true
+    },
+    {
+      "functionName": "get",
+      "ranges": [{ "startOffset": 37, "endOffset": 381, "count": 5 }],
+      "isBlockCoverage": true
+    },
+    {
+      "functionName": "",
+      "ranges": [
+        { "startOffset": 70, "endOffset": 375, "count": 5 },
+        { "startOffset": 112, "endOffset": 157, "count": 1 },
+        { "startOffset": 157, "endOffset": 369, "count": 4 }
+      ],
+      "isBlockCoverage": true
+    },
+    {
+      "functionName": "",
+      "ranges": [{ "startOffset": 233, "endOffset": 313, "count": 3 }],
+      "isBlockCoverage": true
+    },
+    {
+      "functionName": "",
+      "ranges": [{ "startOffset": 321, "endOffset": 359, "count": 1 }],
+      "isBlockCoverage": true
+    }
+  ]
+}

@@ -1,0 +1,36 @@
+{
+  "scriptId": "340",
+  "url": "file:///E:/Projects/badge/src/router/badgeRoutes.ts",
+  "functions": [
+    {
+      "functionName": "",
+      "ranges": [{ "startOffset": 0, "endOffset": 709, "count": 1 }],
+      "isBlockCoverage": true
+    },
+    {
+      "functionName": "handler",
+      "ranges": [{ "startOffset": 272, "endOffset": 316, "count": 2 }],
+      "isBlockCoverage": true
+    },
+    {
+      "functionName": "",
+      "ranges": [{ "startOffset": 281, "endOffset": 316, "count": 2 }],
+      "isBlockCoverage": true
+    },
+    {
+      "functionName": "handler",
+      "ranges": [{ "startOffset": 456, "endOffset": 500, "count": 2 }],
+      "isBlockCoverage": true
+    },
+    {
+      "functionName": "",
+      "ranges": [{ "startOffset": 465, "endOffset": 500, "count": 2 }],
+      "isBlockCoverage": true
+    },
+    {
+      "functionName": "handler",
+      "ranges": [{ "startOffset": 654, "endOffset": 686, "count": 0 }],
+      "isBlockCoverage": false
+    }
+  ]
+}

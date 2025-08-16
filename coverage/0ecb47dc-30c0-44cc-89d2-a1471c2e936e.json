@@ -1,0 +1,24 @@
+{
+  "scriptId": "376",
+  "url": "file:///E:/Projects/badge/src/router/badge/skill.ts",
+  "functions": [
+    {
+      "functionName": "",
+      "ranges": [{ "startOffset": 0, "endOffset": 355, "count": 1 }],
+      "isBlockCoverage": true
+    },
+    {
+      "functionName": "handleBadgeSkill",
+      "ranges": [{ "startOffset": 58, "endOffset": 354, "count": 2 }],
+      "isBlockCoverage": true
+    },
+    {
+      "functionName": "",
+      "ranges": [
+        { "startOffset": 168, "endOffset": 249, "count": 10 },
+        { "startOffset": 231, "endOffset": 243, "count": 5 }
+      ],
+      "isBlockCoverage": true
+    }
+  ]
+}
