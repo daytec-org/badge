@@ -3,7 +3,8 @@
   "tasks": {
     "build": "deno run --allow-env --env-file=.env --allow-net --allow-read --allow-write src/client/bundle.ts",
     "dev": "DEV_MODE=true deno run --allow-env --env-file=.env --allow-net --allow-read --allow-write --watch main.ts",
-    "start": "deno run --allow-env --env-file=.env --allow-net --allow-read --allow-write main.ts"
+    "start": "deno run --allow-env --env-file=.env --allow-net --allow-read --allow-write main.ts",
+    "test": "deno test src/tests --no-check --coverage --allow-read"
   },
   "compilerOptions": {
     "jsx": "react-jsx",

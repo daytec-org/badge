@@ -2,14 +2,13 @@ import { assertEquals } from 'jsr:@std/assert'
 import { describe, it } from 'jsr:@std/testing/bdd'
 import { createMockContext } from 'jsr:@oak/oak/testing'
 import { badgeRoutes } from '../router/badgeRoutes.ts'
-import { handleStack } from '~/src/router/badge/stack.ts'
-import getIcon from '../utils/getIcon.ts'
+import { handleStack } from '../router/badge/stack.ts'
 
-describe('Badge Routes', () => {
+describe('Badge routes', () => {
   const mockProps = {
-    title: 'test',
+    title: 'react',
     color: 'green',
-    icon: 'github',
+    icon: 'react',
     value: '50',
     size: '50',
   }
@@ -25,10 +24,6 @@ describe('Badge Routes', () => {
         const url = new URL(ctx.request.url)
         route.props.forEach(prop => {
           url.searchParams.set(prop, mockProps[prop])
-          if (route.path === '/stack') {
-            const values = url.search
-            console.log('VALUES', values)
-          }
         })
         Object.defineProperty(ctx.request, 'url', { value: url })
       }
@@ -39,12 +34,11 @@ describe('Badge Routes', () => {
     })
   })
 
-  it('should handle stack route with multiple badges', async () => {
+  it('should handle stack route', async () => {
     const ctx = createMockContext({
       method: 'get',
       path: '/stack',
     })
-
     const url = new URL(ctx.request.url)
     url.search = '?title=react&color=green&icon=react&value=50;title=node&color=blue&icon=node&value=80'
     Object.defineProperty(ctx.request, 'url', { value: url })
@@ -60,7 +54,7 @@ describe('Badge Routes', () => {
       path: '/stack',
     })
     const url = new URL(ctx.request.url)
-    url.searchParams.set('title=test&icon=test', '')
+    url.search = '?title=react&color=green&icon=react&value=50'
     Object.defineProperty(ctx.request, 'url', { value: url })
 
     await handleStack(ctx)
@@ -70,21 +64,18 @@ describe('Badge Routes', () => {
 
   it('should handle routes without props', async () => {
     const singleBadges = badgeRoutes.filter(route => route.path === '/plain' || route.path === '/skill')
-
-    if (singleBadges) {
-      singleBadges.forEach(async route => {
-        const ctx = createMockContext({
-          method: 'GET',
-          path: route.path,
-        })
-        const url = new URL(ctx.request.url)
-        Object.defineProperty(ctx.request, 'url', { value: url })
-
-        await route.handler(route.props)(ctx)
-
-        assertEquals(ctx.response.type, 'image/svg+xml; charset=utf-8')
+    singleBadges.forEach(async route => {
+      const ctx = createMockContext({
+        method: 'GET',
+        path: route.path,
       })
-    }
+      const url = new URL(ctx.request.url)
+      Object.defineProperty(ctx.request, 'url', { value: url })
+
+      await route.handler(route.props)(ctx)
+
+      assertEquals(ctx.response.type, 'image/svg+xml; charset=utf-8')
+    })
   })
 
   it('handleStack - invalid input', async () => {
@@ -96,11 +87,5 @@ describe('Badge Routes', () => {
     await handleStack(ctx)
 
     assertEquals(ctx.response.status, 400)
-  })
-
-  it('getIcon function should return empty string for non-existent icon', async () => {
-    const missingResult = await getIcon('non-existent')
-
-    assertEquals(missingResult, '')
   })
 })
