@@ -26,8 +26,12 @@ const getIcon = new ClientIcons().get
 export async function handleImage({ request, response }: Context) {
   const img = request.url.pathname.split('/').pop()
 
-  if (img) {
-    response.type = 'image/svg+xml; charset=utf-8'
-    response.body = await getIcon(img)
+  if (!img || img === '') {
+    response.status = 400
+    response.body = 'Wrong request'
+    return
   }
+
+  response.type = 'image/svg+xml; charset=utf-8'
+  response.body = await getIcon(img)
 }
