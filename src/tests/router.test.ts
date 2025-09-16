@@ -224,31 +224,3 @@ describe('Badge routes', () => {
     assertEquals(ctx.response.status, 400)
   })
 })
-
-// Deno.test('ClientIcons class', async t => {
-//   const clientIcons = new ClientIcons()
-
-//   await t.step('should return cached icon on second request', async () => {
-//     const firstResult = await clientIcons.get('copy.svg')
-//     const secondResult = await clientIcons.get('copy.svg')
-
-//     assertEquals(firstResult, secondResult)
-//     assertEquals(
-//       firstResult,
-//       '<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="#fff" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="feather feather-copy"><rect x="9" y="9" width="13" height="13" rx="2" ry="2"></rect><path d="M5 15H4a2 2 0 0 1-2-2V4a2 2 0 0 1 2-2h9a2 2 0 0 1 2 2v1"></path></svg>',
-//     )
-//   })
-
-//   // await t.step('should return empty string for missing file', async () => {
-//   //   const result = await clientIcons.get('test.svg')
-//   //   assertEquals(result, '')
-//   // })
-
-//   // await t.step('should handle different icon names', async () => {
-//   //   const result1 = await clientIcons.get('copy.svg')
-//   //   const result2 = await clientIcons.get('cross.svg')
-
-//   //   assertEquals(result1, '<svg><text>Test Icon</text></svg>')
-//   //   assertEquals(result2, '<svg><text>Missing Icon</text></svg>')
-//   // })
-// })
