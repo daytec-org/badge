@@ -213,7 +213,7 @@ describe('Badge routes', () => {
     assertEquals(ctx.response.body, 'Wrong request')
   })
 
-  it('handleStack - invalid input', async () => {
+  it('it should return status 400 for empty stack', async () => {
     const ctx = createMockContext({
       method: 'GET',
       path: '/stack',
