@@ -4,9 +4,9 @@ import { handleBadgeSkill } from '~/src/router/badge/skill.ts'
 import { handleStack } from '~/src/router/badge/stack.ts'
 
 export type TBadgeProps = 'title' | 'color' | 'icon' | 'size' | 'value'
-type methods = 'get' | 'post' | 'put' | 'patch' | 'delete'
+type TMethods = 'get' | 'post' | 'put' | 'patch' | 'delete'
 interface Route {
-  method: methods
+  method: TMethods
   path: string
   handler: (props: TBadgeProps[]) => ({ request, response }: Context) => Promise<void>
   props: TBadgeProps[]
