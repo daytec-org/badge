@@ -1,10 +1,11 @@
 import { assertEquals } from 'jsr:@std/assert'
 import { describe, it } from 'jsr:@std/testing/bdd'
 import { createMockContext } from 'jsr:@oak/oak/testing'
+import { RouterContext } from 'jsr:@oak/oak'
 import { badgeRoutes } from '../router/badgeRoutes.ts'
 import { handleStack } from '../router/badge/stack.ts'
 import { handleIconList } from '../router/service/icons.ts'
-import { handleLogs } from '../router/service/logs.ts'
+import { handleLogs, TLogLevelParam } from '../router/service/logs.ts'
 import { handleMainPage } from '../router/client/page.ts'
 import { handleFavicon } from '../router/client/favicon.ts'
 import { handleSource } from '../router/client/src.ts'
@@ -100,7 +101,7 @@ describe('Badge routes', () => {
       method: 'GET',
       path: '/logs',
       params: { level: 'info' },
-    }) as any
+    }) as unknown as RouterContext<'/logs/:level', TLogLevelParam>
 
     await handleLogs(ctx)
 
@@ -112,7 +113,7 @@ describe('Badge routes', () => {
       method: 'GET',
       path: '/logs',
       params: { level: 'test' },
-    }) as any
+    }) as unknown as RouterContext<'/logs/:level', TLogLevelParam>
 
     await handleLogs(ctx)
 

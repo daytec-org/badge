@@ -3,13 +3,13 @@ import { handleBadgePlain } from '~/src/router/badge/plain.ts'
 import { handleBadgeSkill } from '~/src/router/badge/skill.ts'
 import { handleStack } from '~/src/router/badge/stack.ts'
 
-export type badgeProps = 'title' | 'color' | 'icon' | 'size' | 'value'
+export type TBadgeProps = 'title' | 'color' | 'icon' | 'size' | 'value'
 type methods = 'get' | 'post' | 'put' | 'patch' | 'delete'
 interface Route {
   method: methods
   path: string
-  handler: (props: badgeProps[]) => ({ request, response }: Context) => Promise<void>
-  props: badgeProps[]
+  handler: (props: TBadgeProps[]) => ({ request, response }: Context) => Promise<void>
+  props: TBadgeProps[]
 }
 
 export const badgeRoutes: Route[] = [
