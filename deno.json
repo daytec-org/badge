@@ -3,13 +3,12 @@
   "tasks": {
     "build": "deno run --allow-env --env-file=.env --allow-net --allow-read --allow-write src/client/bundle.ts",
     "dev": "DEV_MODE=true deno run --allow-env --env-file=.env --allow-net --allow-read --allow-write --watch main.ts",
-    "start": "deno run --allow-env --env-file=.env --allow-net --allow-read --allow-write main.ts"
+    "start": "deno run --allow-env --env-file=.env --allow-net --allow-read --allow-write main.ts",
+    "test": "deno test src/tests --check --coverage --allow-read --allow-write --allow-env"
   },
   "compilerOptions": {
     "jsx": "react-jsx",
     "jsxImportSource": "react",
-    "jsxFactory": "React.createElement",
-    "jsxFragmentFactory": "React.Fragment",
     "lib": ["dom", "dom.iterable", "deno.ns"]
   },
   "imports": {
